@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "published_on": "2026-10-21",
+  "repo": "XLGXB/jev-local",
+  "tested_commit": "18d153e6bf4ec8a493a4b86becae25b29f95ea97",
+  "scope": "Maintainer-triggered fresh hosted CPU reproduction; not independent community adoption or semantic qualification.",
+  "model_run": {
+    "run_id": 39593252859,
+    "run_url": "https://github.com/XLGXB/jev-local/actions/runs/39593252859",
+    "event": "workflow_dispatch",
+    "run_attempt": 1,
+    "conclusion": "success",
+    "job_id": 119199204283,
+    "artifact_id": 12341744434,
+    "artifact_name": "public-evidence-ranking-cpu-39593252859-1",
+    "artifact_archive_bytes": 20187,
+    "artifact_archive_sha256": "742cb0d72cb1c323a468212a0897f78397184d04c74cbb849969395a8d2872e0",
+    "artifact_expires_at": "2026-10-28T11:39:10Z",
+    "preserved_report": "github-cpu-39593252859.json",
+    "preserved_report_bytes": 119892,
+    "preserved_report_sha256": "b52892fe51f05d2ea04eabaffbf99e4f973bcc12bc9bca51a5bac72046b1c434"
+  },
+  "source_ci": {
+    "run_id": 39592849752,
+    "run_url": "https://github.com/XLGXB/jev-local/actions/runs/39592849752",
+    "event": "push",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "id": 119197849130,
+        "name": "No-model contracts / ubuntu-24.04 / Python 3.11",
+        "conclusion": "success"
+      },
+      {
+        "id": 119197849960,
+        "name": "No-model contracts / windows-2022 / Python 3.11",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "comparison": {
+    "same_dataset_hashes": true,
+    "same_scoring_source_hashes": true,
+    "same_model_manifest_and_asset_identity": true,
+    "cases": 24,
+    "candidate_judgments": 72,
+    "full_native_ranking_changes": 0,
+    "all_aggregate_metrics_equal": true,
+    "max_native_score_absolute_delta": 0.0000019104219625143415,
+    "native_top1_correct": 20,
+    "lexical_top1_correct": 14,
+    "lexical_distractor_native_correct": 0,
+    "lexical_distractor_cases": 4,
+    "score_bitwise_equality_claimed": false
+  },
+  "prior_workflow_validation_failure": {
+    "run_id": 39591967708,
+    "run_url": "https://github.com/XLGXB/jev-local/actions/runs/39591967708",
+    "commit": "ede366c83cbc276e48c8c10d0d4013b88e05c1bc",
+    "job_count": 0,
+    "model_evaluation_started": false,
+    "cause": "runner context is unavailable in jobs.<job_id>.env",
+    "fixed_by_commit": "18d153e6bf4ec8a493a4b86becae25b29f95ea97"
+  },
+  "limits": [
+    "Source CI uses synthetic/injected judges and is not model-quality evidence.",
+    "The 24-case demo is synthetic, uncalibrated and not representative.",
+    "Both methods fail every lexical-distractor case; none was removed.",
+    "The report does not include downloaded weights, private examples, credentials or raw environment logs.",
+    "Artifact ZIP digest verified before reading its sole JSON member; the published JSON is unchanged."
+  ]
+}

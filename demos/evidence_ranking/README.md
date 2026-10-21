@@ -161,6 +161,36 @@ creates a fresh Ubuntu environment, downloads the pinned public model and emits
 one public report artifact (seven-day retention). It has no scheduled/push model
 run and no accuracy threshold that would hide the four observed failures.
 
+### Verified fresh hosted run
+
+On 2026-10-21, the owner manually triggered the authorized CPU reproduction
+**once**. [Run 39593252859, attempt 1](https://github.com/XLGXB/jev-local/actions/runs/39593252859)
+completed successfully against commit
+`18d153e6bf4ec8a493a4b86becae25b29f95ea97` in a fresh Ubuntu 24.04 runner,
+CPython 3.12.15, Torch 2.8.0+cpu, FP32/SDPA/four threads. The complete
+[cloud report](results/github-cpu-39593252859.json) is preserved unchanged so it
+remains available after the seven-day Actions artifact expires. Report SHA-256:
+`b52892fe51f05d2ea04eabaffbf99e4f973bcc12bc9bca51a5bac72046b1c434`.
+The [reproduction receipt](results/reproduction-20261021.json) binds the run,
+commit, artifact archive digest, report digest, source CI and comparison.
+
+The cloud run again measured **20/24** native versus **14/24** lexical, with the
+same **0/4** hard-case failures. Dataset/scoring-source/model-asset identities,
+all aggregate metrics and all 24 full native rankings match the local result.
+The maximum absolute native score difference was approximately `1.91e-6`;
+bitwise floating-point equality is not claimed. Cloud evaluation took 83.294 s
+(load 4.335 s; inference 78.097 s; forwards 77.967 s; validation plus lexical
+preparation 0.005738 s). This is another single-run observation, not a controlled
+hardware speed comparison or a promise about other machines.
+
+[Source CI at the same commit](https://github.com/XLGXB/jev-local/actions/runs/39592849752)
+passed both Ubuntu 24.04 and Windows 2022 jobs. The first workflow definition
+had an [Actions context-validation failure](https://github.com/XLGXB/jev-local/actions/runs/39591967708):
+`runner.temp` was unavailable in job-level `env`. It created **zero jobs** and
+performed no model evaluation. Commit `18d153e` moved path initialization into
+a runner step before the single successful manual model run. That failure is
+retained in public history rather than presented as an executed model attempt.
+
 For an independent attempt, use the repository's reproducibility issue form
 and follow [CONTRIBUTING.md](../../CONTRIBUTING.md). Report successes **and**
 failures with the commit, command, sanitized environment, hashes and result.

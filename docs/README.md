@@ -38,4 +38,4 @@ Updated: 2026-10-21. Current interfaces, historical design and local evidence ha
 
 Parsed source, fake tests, isolated real browsers, native inference, optimizer runs and production tasks are not interchangeable. Experiment dates remain historical; this documentation update did not rerun them.
 
-The initial source upload on 2026-10-21 is distinct from the September experiments. Hosted CI is configured; the authorized manual cloud-CPU reproduction is still pending. Neither configuration nor publication is independent usage evidence.
+The initial source upload on 2026-10-21 is distinct from the September experiments. [Windows/Linux source CI](https://github.com/XLGXB/jev-local/actions/runs/39592849752) and the one [manual cloud-CPU reproduction](https://github.com/XLGXB/jev-local/actions/runs/39593252859) passed at commit `18d153e`; the demo preserves both full reports and their hashes. Maintainer runs and publication are not independent community-usage evidence.
