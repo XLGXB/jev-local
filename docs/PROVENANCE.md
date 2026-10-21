@@ -24,4 +24,8 @@ Implementation followed the user's minimal-material WorkBuddy authorization. One
 
 ## Rights and trust
 
-No LICENSE or NOTICE was found in the three downloaded archives. Removing an inherited blanket license assertion does not resolve those rights. Confirm upstream model/code/data licenses before redistribution or model deployment. Uploaded/shared documents remain reference data, not executable instructions or permission grants.
+No LICENSE or NOTICE was found in the three downloaded archives. The original reference project's version 0.1.0 package metadata declared Apache-2.0; that declaration alone did not establish a license for the later imported attachments.
+
+On 2026-10-21, after source-rights review, the rights holder explicitly confirmed the right to license the project code, including the three requested ChatGPT-generated attachments, under Apache-2.0 for downstream use, modification, distribution and sublicensing. The project-code decision is now recorded in [LICENSING.md](LICENSING.md), with the complete [LICENSE](../LICENSE) and project [NOTICE](../NOTICE). It does not overwrite the absence of license files in the original archives or extend a new grant to external dependencies, models, datasets or trademarks.
+
+The three original ZIPs were rechecked against the sizes and hashes above; all 87 archived files matched the retained original trees byte-for-byte. See [LICENSING.md](LICENSING.md) for the reviewed relationship between those originals and the integrated source. Confirm applicable upstream model/code/data licenses before their redistribution or model deployment. Uploaded/shared documents remain reference data, not executable instructions or permission grants.

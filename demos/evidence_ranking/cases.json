@@ -1,0 +1,540 @@
+{
+  "schema_version": 1,
+  "dataset_id": "jevlocal-public-evidence-v1",
+  "provenance": {
+    "kind": "new_synthetic_ai_assisted_examples",
+    "license": "Apache-2.0",
+    "created": "2026-10-21",
+    "private_data_used": false
+  },
+  "cases": [
+    {
+      "id": "direct-01",
+      "query": "Where does the application show its installed version number?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-01:a",
+          "text": "Open Settings, then Appearance. The preview displays the selected theme, together with the current interface text size."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-01:b",
+          "text": "Open Help, then Keyboard Reference. A table lists the available shortcuts, grouped by the window in which they work."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-01:c",
+          "text": "Open Help, then About. The installed version number appears beneath the application name, beside the build date."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-02",
+      "query": "How can I display line numbers in the editor?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-02:a",
+          "text": "Under Settings > Editor, enable Word Wrap to keep long lines within the visible width without changing the document."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-02:b",
+          "text": "Under Settings > Editor, enable Highlight Current Line to shade the row containing the cursor without altering its text."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-02:c",
+          "text": "Under Settings > Editor, enable Show Line Numbers. The editor then adds numbered labels along the left margin."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-03",
+      "query": "What is the maximum number of recent files shown in the File menu?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-03:a",
+          "text": "The File menu shows up to twelve recent files. Opening another file replaces the oldest unpinned entry in that list."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-03:b",
+          "text": "The File menu places pinned files above recent files. Pinning an entry preserves its position while other entries move."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-03:c",
+          "text": "The File menu abbreviates long recent-file paths. Hover over an entry to see its complete folder and filename."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-04",
+      "query": "Which keyboard shortcut opens the command palette?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-04:a",
+          "text": "Press Ctrl+Shift+O to open the symbol list. Type part of a heading name to navigate within the current document."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-04:b",
+          "text": "Press Ctrl+Shift+F to open workspace search. Type a phrase to find matching text across the currently opened folder."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-04:c",
+          "text": "Press Ctrl+Shift+P to open the command palette. Type part of a command name to narrow the displayed command list."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-05",
+      "query": "Where can I choose a light or dark theme?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-05:a",
+          "text": "Settings > Appearance contains Toolbar Density. Choose Compact or Comfortable there to adjust the space between toolbar controls."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-05:b",
+          "text": "Settings > Appearance contains Interface Scale. Choose a percentage there to resize labels and controls throughout the application."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-05:c",
+          "text": "Settings > Appearance contains Color Theme. Choose Light or Dark there; the window preview updates before you confirm."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-06",
+      "query": "How often does the local index refresh automatically?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-06:a",
+          "text": "The local index reads plain-text documents in the opened folder. Files outside that folder are omitted from its search results."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-06:b",
+          "text": "The local index refreshes automatically every ten minutes while the application is open. The bottom bar shows the last refresh time."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-06:c",
+          "text": "The local index status appears in the bottom bar. Its counter reports how many documents were included in the latest scan."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-07",
+      "query": "Which image formats can the preview panel display?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-07:a",
+          "text": "The preview panel places image captions below the picture. Captions wrap automatically when the panel becomes too narrow."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-07:b",
+          "text": "The preview panel displays PNG, JPEG, and GIF images. Other image types appear as filenames without an inline picture."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-07:c",
+          "text": "The preview panel fits large images within its bounds. Its zoom control can show a supported image at its original size."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-08",
+      "query": "How do I sort the task list by due date?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-08:a",
+          "text": "Use the Columns menu above the task list and select Owner. An additional column displays the assigned name for each task."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-08:b",
+          "text": "Use the Sort menu above the task list and select Due Date. Select the same item again to reverse the date order."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-08:c",
+          "text": "Use the Filter menu above the task list and select Open Only. Completed tasks are hidden until you change the filter."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-09",
+      "query": "Where can I see whether a background export has finished?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-09:a",
+          "text": "The Activity panel lists background exports. A Finished badge beside an export indicates that its output file is ready to open."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-09:b",
+          "text": "The Export Preferences panel lists available page sizes. Its selection controls the layout used by subsequent document exports."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-09:c",
+          "text": "The Document Outline panel lists headings in reading order. Selecting a heading scrolls the editor to that section of the document."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-10",
+      "query": "What default filename is suggested when saving a new untitled note?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-10:a",
+          "text": "Saving a new untitled note suggests note.txt as the filename. You can edit that suggestion before choosing a destination folder."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-10:b",
+          "text": "Saving an existing note keeps its current text encoding. The status bar identifies that encoding beside the document's line-ending style."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-10:c",
+          "text": "Saving a note updates its modified-time label. The label appears in the information panel together with the document's character count."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-11",
+      "query": "How can I temporarily hide the sidebar?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-11:a",
+          "text": "Choose View > Toolbar to toggle the row of buttons at the top of the window. Menu commands remain available while it is hidden."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-11:b",
+          "text": "Choose View > Status Bar to toggle the strip at the bottom of the window. This does not change the document or sidebar."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-11:c",
+          "text": "Choose View > Sidebar to toggle the left navigation area. Your selected item remains selected when the sidebar is shown again."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "direct-12",
+      "query": "What does a hollow circle beside a document tab mean?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:direct-12:a",
+          "text": "A hollow circle beside a document tab means that the document has unsaved edits. The circle disappears after those edits are saved."
+        },
+        {
+          "id": "b",
+          "source": "public-example:direct-12:b",
+          "text": "A small lock beside a document tab means that the document is read-only. You may select and copy text while that mark is present."
+        },
+        {
+          "id": "c",
+          "source": "public-example:direct-12:c",
+          "text": "A small pin beside a document tab means that the tab is pinned. Pinned tabs stay at the beginning of the tab row."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "paraphrase-01",
+      "query": "How can I make the writing area stop stretching across a wide monitor?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:paraphrase-01:a",
+          "text": "Enable Focus Highlight under View to dim paragraphs away from the cursor. The document retains its existing horizontal dimensions and margins."
+        },
+        {
+          "id": "b",
+          "source": "public-example:paraphrase-01:b",
+          "text": "Enable Centered Layout under View to constrain the editor to a readable column. Extra horizontal space becomes margins on both sides."
+        },
+        {
+          "id": "c",
+          "source": "public-example:paraphrase-01:c",
+          "text": "Enable Presentation Mode under View to enlarge interface labels. Toolbar buttons grow with the labels, while the editor keeps its current width."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "paraphrase-02",
+      "query": "I want the document's section titles in a navigable tree. Which view provides that?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:paraphrase-02:a",
+          "text": "The Outline view arranges headings in a nested hierarchy. Selecting an entry moves the editor to the corresponding section of the document."
+        },
+        {
+          "id": "b",
+          "source": "public-example:paraphrase-02:b",
+          "text": "The Resource view groups embedded pictures by file type. Selecting an item displays the picture and its caption in the preview panel."
+        },
+        {
+          "id": "c",
+          "source": "public-example:paraphrase-02:c",
+          "text": "The History view groups saved revisions by day. Selecting an item displays an earlier copy beside the current document for comparison."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "paraphrase-03",
+      "query": "Can I inspect what changed between the current note and its last saved copy?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:paraphrase-03:a",
+          "text": "Document Statistics reports word and character totals for the active note. The totals update as you type and include the selected passage separately."
+        },
+        {
+          "id": "b",
+          "source": "public-example:paraphrase-03:b",
+          "text": "Document Properties reports the active note's folder and encoding. Its time labels describe when the file was created and most recently saved."
+        },
+        {
+          "id": "c",
+          "source": "public-example:paraphrase-03:c",
+          "text": "Compare with Saved opens a side-by-side difference view. It marks additions and removals between the active buffer and the most recent saved file."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "paraphrase-04",
+      "query": "How do I keep a reference page visible while working in a second document?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:paraphrase-04:a",
+          "text": "Choose Pin Tab to keep a reference near the start of the tab row. Switching documents still replaces the content in the single editor pane."
+        },
+        {
+          "id": "b",
+          "source": "public-example:paraphrase-04:b",
+          "text": "Choose Recent Documents to locate a previously opened reference. Selecting an entry loads that document into the currently active editor pane."
+        },
+        {
+          "id": "c",
+          "source": "public-example:paraphrase-04:c",
+          "text": "Choose Split Editor, then open the reference in one pane and the working document in the other. Each pane scrolls independently."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "paraphrase-05",
+      "query": "The results list is too crowded. How can I restrict matches to filenames ending in .md?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:paraphrase-05:a",
+          "text": "In workspace search, enter *.md in the Include Files field. The results then include only matching files with that filename extension."
+        },
+        {
+          "id": "b",
+          "source": "public-example:paraphrase-05:b",
+          "text": "In workspace search, Match Case distinguishes uppercase from lowercase letters in document text. It does not filter results by their file extensions."
+        },
+        {
+          "id": "c",
+          "source": "public-example:paraphrase-05:c",
+          "text": "In workspace search, Collapse Groups shows only the filename headers until expanded. It changes the result display without excluding any matching files."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "paraphrase-06",
+      "query": "Which setting makes the preview move along with the place I am reading in the editor?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:paraphrase-06:a",
+          "text": "Preview > Synchronized Scrolling links the two panes. As the editor moves through the document, the rendered preview follows the corresponding passage."
+        },
+        {
+          "id": "b",
+          "source": "public-example:paraphrase-06:b",
+          "text": "Preview > Fit Width scales rendered pages to the available pane width. Scrolling the editor does not affect the preview's position in this mode."
+        },
+        {
+          "id": "c",
+          "source": "public-example:paraphrase-06:c",
+          "text": "Preview > Show Page Borders draws outlines around rendered pages. It changes the preview decoration without linking movement between the two panes."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "paraphrase-07",
+      "query": "How do I get notified visually rather than hearing a chime when an export finishes?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:paraphrase-07:a",
+          "text": "Under Notifications, set Badge Style to Number. The application icon shows an unread count, without changing the way export completion is announced."
+        },
+        {
+          "id": "b",
+          "source": "public-example:paraphrase-07:b",
+          "text": "Under Notifications, set Export Completion to Banner Only. Completion then produces an on-screen message without playing the notification sound."
+        },
+        {
+          "id": "c",
+          "source": "public-example:paraphrase-07:c",
+          "text": "Under Notifications, set Reminder Duration to Long. Scheduled reminder banners remain visible longer, without changing export completion alerts or their sound."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "paraphrase-08",
+      "query": "Can the editor show invisible gaps so I can distinguish spaces from tabs?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:paraphrase-08:a",
+          "text": "Editor > Ruler displays a vertical guide at a chosen column. It helps judge line length without marking individual spaces or tab characters."
+        },
+        {
+          "id": "b",
+          "source": "public-example:paraphrase-08:b",
+          "text": "Editor > Render Whitespace draws dots for spaces and arrows for tabs. These display marks do not become part of the saved document text."
+        },
+        {
+          "id": "c",
+          "source": "public-example:paraphrase-08:c",
+          "text": "Editor > Indentation Width controls how far a tab advances the cursor. It changes spacing width without adding visible markers to whitespace characters."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "lexical-01",
+      "query": "Where can I read the reason that the most recent background export failed?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:lexical-01:a",
+          "text": "The background export preferences include a setting named Notify on Failed Export. It controls alerts, but does not display the reason for an earlier failure."
+        },
+        {
+          "id": "b",
+          "source": "public-example:lexical-01:b",
+          "text": "The background export help page explains the failed-export badge colors and where the badge appears. It contains no details for individual export attempts."
+        },
+        {
+          "id": "c",
+          "source": "public-example:lexical-01:c",
+          "text": "Open Activity, select the latest unsuccessful job, and expand Details. Its diagnostic message describes the cause recorded when that operation stopped."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "lexical-02",
+      "query": "How can I see the full path of the file that is currently open?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:lexical-02:a",
+          "text": "The Full Path column in Search Results describes files returned by a search. The currently open file may be absent, and the column does not track the active tab."
+        },
+        {
+          "id": "b",
+          "source": "public-example:lexical-02:b",
+          "text": "Open Document Information and look at Location. That field displays the active document's complete directory and filename, even when its tab label is shortened."
+        },
+        {
+          "id": "c",
+          "source": "public-example:lexical-02:c",
+          "text": "The Open File dialog has a Full Path input for choosing another file. Its initial value is the last visited folder, not the path of the currently open file."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "lexical-03",
+      "query": "How do I find out which text encoding the current document uses?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:lexical-03:a",
+          "text": "Read the right-hand status-bar label beneath the active editor. It reports the character format detected for that file, such as UTF-8 or UTF-16."
+        },
+        {
+          "id": "b",
+          "source": "public-example:lexical-03:b",
+          "text": "Default Text Encoding in New Document Preferences determines the encoding of future documents. It does not report the encoding used by the current document."
+        },
+        {
+          "id": "c",
+          "source": "public-example:lexical-03:c",
+          "text": "The Text Encoding glossary defines several encoding names and byte-order marks. Its examples are general explanations, not information about the current document."
+        }
+      ],
+      "max_chars": 12000
+    },
+    {
+      "id": "lexical-04",
+      "query": "Where can I check how many words are in the currently selected passage?",
+      "candidates": [
+        {
+          "id": "a",
+          "source": "public-example:lexical-04:a",
+          "text": "The Words per Page setting in print layout estimates pagination for the whole document. It neither counts words in the selected passage nor changes with the selection."
+        },
+        {
+          "id": "b",
+          "source": "public-example:lexical-04:b",
+          "text": "Open Statistics while a range of text is highlighted. The Selection row reports a separate word total for that range alongside the whole-document total."
+        },
+        {
+          "id": "c",
+          "source": "public-example:lexical-04:c",
+          "text": "The Selected Passage color setting changes the highlight behind selected words. Its preview uses sample text and contains no count of the actual selected passage."
+        }
+      ],
+      "max_chars": 12000
+    }
+  ]
+}

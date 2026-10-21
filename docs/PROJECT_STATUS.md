@@ -1,6 +1,6 @@
 # Project status
 
-Reviewed for local organization: **2026-10-21**. This is a source/evidence summary, not new training, model evaluation, browser acceptance or a release run. Historical experiments below occurred in September 2026; individual receipts retain exact dates, pins and limits.
+Updated: **2026-10-21**. The initial source was uploaded to [XLGXB/jev-local](https://github.com/XLGXB/jev-local) at [b31492c](https://github.com/XLGXB/jev-local/commit/b31492c131315f73daad3f8f06a6bb430c1d93e2). This update adds public-readiness navigation and a new local CPU demo; it is not new training, broad model qualification or browser acceptance. Historical experiments occurred in September 2026; individual summaries preserve their original dates, pins and limits.
 
 ## Full goal and acceptance boundary
 
@@ -38,7 +38,17 @@ Keep four layers separate: **implementation** (mechanism/contracts), **consumer*
 
 See [integration](INTEGRATION.md), [native validation](NATIVE_VALIDATION.md), and [Pi](../pi/README.md) for exact contracts. Some tests use fake predictors; no current full-suite success is inferred from source existence.
 
-## Latest retained quality evidence: not qualified
+## Public demonstration and readiness evidence
+
+The [evidence-ranking demo](../demos/evidence_ranking/README.md) uses **Qwen/Qwen3-Reranker-0.6B**, revision `e61197ed45024b0ed8a2d74b80b4d909f1255473`, for real local **CPU** inference on 24 newly authored public synthetic questions with 72 candidates. Top-1 accuracy was **20/24**, compared with **14/24** for the lexical baseline. The measured subsets were direct 12/12, paraphrase 8/8, and lexical-distractor **0/4**; all four distractor gold candidates ranked third. See the [saved local result](../demos/evidence_ranking/results/local-cpu-20261021.json).
+
+This is zero-training, small synthetic evidence. It is not representative domain acceptance, calibration, training improvement or a demonstrated time saving. The failures are part of the result, not omitted exceptions.
+
+[Historical experiment summaries](experiments/README.md) cover **19 actual SFT runs: 14 Kev and 5 Laya**, with CLM classified separately as baseline and mechanical/unexecuted work kept in appendices. They publish reviewed configuration/metrics/summary hashes, not original private samples, weights or raw logs. Historical dates must not be relabeled recent ongoing maintenance. An SFT run count is not a count of qualified models.
+
+The [CI workflow](../.github/workflows/ci.yml) configures dependency-light standard-library checks on Windows and Linux; a workflow file does not prove a hosted run passed. The authorized manual cloud-CPU reproduction has **not yet been executed**. Contribution guidance and issue forms are available, but independent community adoption/usage evidence has not been established; Stars/Forks cannot substitute for it.
+
+## Latest retained training quality evidence: not qualified
 
 Local compact summaries: `runtime/laya-question-bank-sft-01/root-state.json` and `runtime/clm-original-view-baseline-01/root-state.json`, recorded 2026-09-27. They remain local-only.
 
@@ -69,6 +79,6 @@ Stage wall times include cold loads/harness work; do not relabel them inference 
 - Establish authorized, representative, leakage-controlled semantic quality, retention, calibration and rejection evidence. Failed candidates remain unqualified.
 - Complete supported production-host/consumer qualification. Explicit CLI, stdio, SDK slices and connected-host operation are distinct; universal Codex interception is not claimed.
 - Verify applicable recovery, resource, egress and performance scenarios without replaying uncertain effects or reopening terminal stages without a newly authorized scope.
-- Resolve redistribution rights before publication/deployment; see [publishing](PUBLISHING.md).
+- Preserve the Apache-2.0 project-code decision and applicable third-party obligations; review any newly distributed model/data assets separately. See [licensing](LICENSING.md) and [publishing](PUBLISHING.md).
 
-No training, installation, registration, project Git initialization, GitHub repository creation or upload was performed by this documentation pass. Evidence paths identify retained records, not newly executed checks or files expected in published source.
+This documentation edit itself performs no training, installation, service registration, commit or push. The initial source upload and new local CPU demo are distinct recorded activities described above. Historical `runtime/` paths identify retained local records, not files bundled with published source. Hosted/manual cloud results remain pending until their actual receipts exist.

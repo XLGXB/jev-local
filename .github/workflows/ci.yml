@@ -1,0 +1,64 @@
+name: Source contracts (no model)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: source-contracts-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  source-contracts:
+    name: No-model contracts / ${{ matrix.os }} / Python 3.11
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022]
+    defaults:
+      run:
+        shell: bash
+    env:
+      PYTHONPATH: src
+      PYTHONUTF8: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+    steps:
+      # Official actions v6 refs resolved to these immutable commits.
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24.14.1"
+          package-manager-cache: false
+      - name: Record versions and tested revision
+        run: |
+          git rev-parse HEAD
+          python --version
+          node --version
+      # -S excludes site-packages: these checks require only the standard library.
+      - name: Core source smoke
+        run: python -S -B -X utf8 tests/test_core.py
+      - name: Serve and export source smoke (temporary loopback fixture)
+        run: python -S -B -X utf8 tests/test_serve.py
+      - name: Browser logic self-test (no browser connection)
+        run: node browser/selftest.mjs
+      - name: Deterministic integration contracts (synthetic fixtures, not model quality)
+        run: |
+          python -S -B -X utf8 -m unittest discover -s tests/integration_v1 -p 'test_data*.py' -v
+          python -S -B -X utf8 -m unittest discover -s tests/integration_v1 -p 'test_claim_support.py' -v
+          python -S -B -X utf8 -m unittest discover -s tests/integration_v1 -p 'test_completion_verification.py' -v
+          python -S -B -X utf8 -m unittest discover -s tests/integration_v1 -p 'test_qualification.py' -v
+          python -S -B -X utf8 -m unittest discover -s tests/integration_v1 -p 'test_json_render.py' -v
+          python -S -B -X utf8 -m unittest discover -s tests/integration_v1 -p 'test_qwen_context.py' -v
+          python -S -B -X utf8 -m unittest discover -s tests/integration_v1 -p 'test_public_ranking_demo.py' -v

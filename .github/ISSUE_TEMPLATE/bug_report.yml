@@ -1,0 +1,42 @@
+name: Bug report
+description: Report a reproducible defect with safe public material.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: Do not post secrets, credentials, account/session data, private documents or raw private logs. Use a small sanitized reproducer.
+  - type: input
+    id: revision
+    attributes:
+      label: Exact revision and runtime versions
+      description: Commit SHA or release, OS, Python and Node versions; list relevant dependency versions.
+    validations:
+      required: true
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: Minimal reproduction
+      description: Exact commands and steps from a clean checkout. Include a small public or synthetic input and its source/hash where applicable. Remove secrets and personal paths.
+    validations:
+      required: true
+  - type: textarea
+    id: expected_actual
+    attributes:
+      label: Expected versus actual result
+      description: Include the exit code and a short sanitized output excerpt. Identify skipped checks and whether this was source-only, synthetic/mock, or real inference.
+    validations:
+      required: true
+  - type: textarea
+    id: permissions
+    attributes:
+      label: Public material provenance and permission
+      description: State the source and license or publication/reuse permission for supplied inputs and attachments; write "No attachments; synthetic reproducer" if appropriate.
+    validations:
+      required: true
+  - type: checkboxes
+    id: disclosure
+    attributes:
+      label: Public disclosure check
+      options:
+        - label: I reviewed this report and attachments for secrets/private data and have permission to publish the supplied material.
+          required: true

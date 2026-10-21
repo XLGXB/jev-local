@@ -1,0 +1,59 @@
+name: Independent reproducibility report
+description: Record an independent attempt, including failures and skipped stages.
+title: "[Reproduction] "
+body:
+  - type: markdown
+    attributes:
+      value: A report records an attempt, not wider adoption or model qualification. Do not upload credentials, private data, model weights without redistribution permission, or raw private logs.
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Attempt scope
+      options:
+        - Source contracts only (no model)
+        - Synthetic or mock inference
+        - Real model inference
+    validations:
+      required: true
+  - type: input
+    id: revision
+    attributes:
+      label: Repository commit and instruction version
+      description: Exact commit SHA and the public instructions followed, with any deviations.
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Anonymized environment
+      description: OS, Python/Node and relevant dependency versions; CPU, RAM and CPU/GPU mode. For GPU inference include GPU/VRAM and driver/CUDA versions. Omit hostnames, usernames, account IDs and personal paths.
+    validations:
+      required: true
+  - type: textarea
+    id: materials
+    attributes:
+      label: Public inputs and model identity
+      description: Input source, revision/hash and publication/reuse license or permission. For real inference, public model identifier/revision and checkpoint hash if available; otherwise write "No model". Do not attach private data or weights.
+    validations:
+      required: true
+  - type: textarea
+    id: commands
+    attributes:
+      label: Exact commands and changes
+      description: Commands from a clean checkout, configuration changes, and any deviations from the instructions. Remove secrets and private paths.
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Observed results and limitations
+      description: Expected versus actual output, exit codes, pass/fail/skip counts and sanitized excerpts. State failed, unrun and skipped stages. Only include timing or accuracy actually measured, with its method and sample count.
+    validations:
+      required: true
+  - type: checkboxes
+    id: disclosure
+    attributes:
+      label: Public disclosure check
+      options:
+        - label: I reviewed this report and attachments for secrets/private data and have permission to publish the supplied material.
+          required: true

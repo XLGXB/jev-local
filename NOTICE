@@ -1,0 +1,15 @@
+JevLocal
+Copyright 2026 JevLocal contributors.
+
+Source: https://github.com/XLGXB/jev-local
+
+This project includes the original JevLocal reference code, three requested
+ChatGPT-generated code attachments, and subsequent local integration contributions.
+Their provenance and the project-code licensing decision are documented in
+docs/PROVENANCE.md and docs/LICENSING.md.
+
+Third-party dependencies and separately obtained models and datasets remain
+subject to their own licenses and applicable notices. This file does not replace
+those notices or claim that they are bundled with this source-only distribution.
+
+This NOTICE is informational and does not modify the Apache License, Version 2.0.

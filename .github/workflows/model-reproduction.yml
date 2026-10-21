@@ -1,0 +1,205 @@
+name: Public model reproduction (CPU)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: public-model-reproduction-cpu
+  cancel-in-progress: false
+
+jobs:
+  evidence-ranking:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
+    env:
+      PYTHONUTF8: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+      PIP_DISABLE_PIP_VERSION_CHECK: "1"
+      HF_HOME: ${{ runner.temp }}/public-ranking-hf-home
+      HF_HUB_DISABLE_IMPLICIT_TOKEN: "1"
+      HF_HUB_DISABLE_TELEMETRY: "1"
+      DO_NOT_TRACK: "1"
+      MODEL_DIR: ${{ runner.temp }}/public-ranking-model
+      REPORT_PATH: ${{ runner.temp }}/public-ranking-report.json
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: "3.12"
+      - name: Install fixed CPU dependencies
+        run: |
+          python -m pip install --index-url https://download.pytorch.org/whl/cpu torch==2.8.0
+          python -m pip install -r demos/evidence_ranking/requirements-cpu.txt
+          python -m pip check
+      - name: Verify CPU-only PyTorch and public input structure
+        run: |
+          python - <<'PY'
+          import torch
+          assert torch.__version__ == "2.8.0+cpu", "fixed CPU wheel required"
+          assert torch.version.cuda is None, "CUDA wheel forbidden"
+          assert torch.version.hip is None, "ROCm wheel forbidden"
+          assert not torch.backends.cuda.is_built(), "CUDA build forbidden"
+          assert not torch.cuda.is_available(), "CPU-only reproduction required"
+          print("Verified torch", torch.__version__, "CPU-only build")
+          PY
+          python -B -X utf8 demos/evidence_ranking/run.py --validate-only
+          git rev-parse HEAD
+      - name: Download only the fixed public model assets (no token)
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path, PurePosixPath
+          from huggingface_hub import snapshot_download
+
+          manifest = json.loads(Path("demos/evidence_ranking/model-manifest.json").read_text(encoding="utf-8"))
+          assert manifest["model_id"] == "Qwen/Qwen3-Reranker-0.6B"
+          assert manifest["revision"] == "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+          paths = [asset["path"] for asset in manifest["files"]]
+          assert len(paths) == len(set(paths)) == 14
+          for name in paths:
+              path = PurePosixPath(name)
+              assert not path.is_absolute() and ".." not in path.parts
+              assert not any(character in name for character in "*?[]\\"), "literal asset paths only"
+          temporary_root = Path(os.environ["RUNNER_TEMP"]).resolve()
+          destination = Path(os.environ["MODEL_DIR"])
+          assert destination.parent.resolve() == temporary_root and not destination.exists()
+          assert not Path(os.environ["REPORT_PATH"]).exists()
+          snapshot_download(
+              repo_id="Qwen/Qwen3-Reranker-0.6B",
+              revision="e61197ed45024b0ed8a2d74b80b4d909f1255473",
+              local_dir=destination,
+              allow_patterns=paths,
+              token=False,
+              max_workers=4,
+          )
+          print("Downloaded fixed public revision; run.py will verify all 14 asset hashes before loading.")
+          PY
+      - name: Evaluate all 24 cases once (offline CPU FP32 SDPA, 4 threads, seed 42)
+        env:
+          HF_HUB_OFFLINE: "1"
+          TRANSFORMERS_OFFLINE: "1"
+          TORCH_FORCE_WEIGHTS_ONLY_LOAD: "1"
+          OMP_NUM_THREADS: "4"
+          MKL_NUM_THREADS: "4"
+        run: |
+          python -B -X utf8 demos/evidence_ranking/run.py \
+            --model-dir "$MODEL_DIR" \
+            --output "$REPORT_PATH"
+      - name: Validate complete report and summarize measured results
+        run: |
+          python - <<'PY'
+          import copy
+          import hashlib
+          import math
+          import os
+          from pathlib import Path
+          import runpy
+
+          demo = runpy.run_path("demos/evidence_ranking/run.py")
+          read_json = demo["read_json"]
+          report_path = Path(os.environ["REPORT_PATH"])
+          assert report_path.is_file() and not report_path.is_symlink()
+          report = read_json(report_path)
+          cases_path = Path("demos/evidence_ranking/cases.json")
+          labels_path = Path("demos/evidence_ranking/labels.json")
+          manifest_path = Path("demos/evidence_ranking/model-manifest.json")
+          dataset = read_json(cases_path)
+          labels = demo["validate_labels"](read_json(labels_path), dataset)
+          prepared = demo["validate_cases"](dataset)
+          expected = {case["id"]: {candidate["id"] for candidate in case["candidates"]}
+                      for case in dataset["cases"]}
+          assert len(prepared) == len(expected) == len(report["cases"]) == 24
+          assert len({row["id"] for row in report["cases"]}) == 24
+          assert {row["id"] for row in report["cases"]} == set(expected)
+          assert report["schema_version"] == 1 and report["status"] == "evaluated"
+          assert report["dataset"]["id"] == dataset["dataset_id"]
+          assert report["dataset"]["provenance"] == dataset["provenance"]
+          digest = lambda path: hashlib.sha256(Path(path).read_bytes()).hexdigest()
+          assert report["dataset"]["cases_sha256"] == digest(cases_path)
+          assert report["dataset"]["labels_sha256"] == digest(labels_path)
+          for key, path in {
+              "demos/evidence_ranking/run.py": "demos/evidence_ranking/run.py",
+              "jevlocal/integration/qwen_context.py": "src/jevlocal/integration/qwen_context.py",
+              "jevlocal/integration/context_tools.py": "src/jevlocal/integration/context_tools.py",
+              "model_manifest_sha256": manifest_path,
+          }.items():
+              assert report["sources"][key] == digest(path)
+          manifest = read_json(manifest_path)
+          assert report["model"]["model_id"] == "Qwen/Qwen3-Reranker-0.6B"
+          assert report["model"]["revision"] == "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+          assert report["model"]["files_verified"] is True
+          assert report["model"]["files"] == sorted(manifest["files"], key=lambda asset: asset["path"])
+          for key, value in {
+              "device": "cpu", "weights_dtype": "float32", "attention": "sdpa",
+              "threads": 4, "seed": 42, "offline": True, "local_files_only": True,
+              "trust_remote_code": False, "use_safetensors": True,
+          }.items():
+              assert report["runtime"][key] == value
+          assert report["runtime"]["dependencies"]["torch"].split("+", 1)[0] == "2.8.0"
+          for key in ("calibrated", "execution_authorized", "training_allowed", "primary_changed"):
+              assert report[key] is False
+          for row in report["cases"]:
+              for ranking in (row["recommendation"]["ranking"], row["primary"]["results"]):
+                  ordered = [item["id"] for item in ranking]
+                  assert len(ordered) == len(set(ordered)) == len(expected[row["id"]])
+                  assert set(ordered) == expected[row["id"]]
+          recalculated = copy.deepcopy(report["cases"])
+          def compare_metrics(expected_values, actual_values):
+              assert set(expected_values) == set(actual_values)
+              for key, value in expected_values.items():
+                  actual = actual_values[key]
+                  if isinstance(value, dict):
+                      compare_metrics(value, actual)
+                  elif isinstance(value, float):
+                      assert type(actual) in (int, float) and math.isclose(value, actual, rel_tol=1e-12, abs_tol=1e-12)
+                  else:
+                      assert value == actual
+          compare_metrics(demo["add_metrics"](recalculated, labels), report["metrics"])
+          assert [row["evaluation"] for row in recalculated] == [row["evaluation"] for row in report["cases"]]
+
+          lines = ["# Public synthetic evidence-ranking reproduction (CPU)",
+                   "", "All 24 cases completed; identity, inputs and report completeness verified.",
+                   "Accuracy is measured, not a pass threshold. This run does not qualify semantic quality,",
+                   "authorize actions, or demonstrate independent third-party adoption.",
+                   "", f"Tested commit: `{os.environ['GITHUB_SHA']}`", "",
+                   "| Method / category | Cases | Top-1 accuracy | MRR |",
+                   "| --- | ---: | ---: | ---: |"]
+          errors = []
+          for method in ("native", "lexical"):
+              metrics = report["metrics"][method]
+              for category, values in [("all", metrics), *metrics["per_category"].items()]:
+                  lines.append(f"| {method} / {category} | {values['count']} | "
+                               f"{values['top1_accuracy']:.6f} | {values['mrr']:.6f} |")
+              errors.append(f"- {method} errors: " + (", ".join(metrics["errors"]) or "none"))
+          lines.extend(["", "## Observed errors", *errors, "",
+                        "Only the complete public JSON report is retained as an artifact for 7 days."])
+          with Path(os.environ["GITHUB_STEP_SUMMARY"]).open("a", encoding="utf-8") as stream:
+              stream.write("\n".join(lines) + "\n")
+          print("Complete 24-case public report verified; no accuracy threshold applied.")
+          PY
+      - name: Upload only the validated public report
+        if: success()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: public-evidence-ranking-cpu-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/public-ranking-report.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Record an incomplete or failed attempt
+        if: failure()
+        run: |
+          {
+            echo '# Public CPU reproduction failed'
+            echo 'The attempt failed; do not treat it as a completed reproduction.'
+            echo 'Inspect the failed step for its actual error. No retry, label change or accuracy-threshold relaxation was performed.'
+            echo 'No artifact is uploaded unless evaluation and complete-report validation both succeed.'
+          } >> "$GITHUB_STEP_SUMMARY"

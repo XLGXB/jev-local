@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "dataset_id": "jevlocal-public-evidence-v1",
+  "labels": [
+    {
+      "id": "direct-01",
+      "expected_id": "c",
+      "category": "direct",
+      "rationale": "Only c locates the installed version number; b covers shortcuts and a covers appearance."
+    },
+    {
+      "id": "direct-02",
+      "expected_id": "c",
+      "category": "direct",
+      "rationale": "Only c enables line numbers; a wraps lines and b highlights the cursor row."
+    },
+    {
+      "id": "direct-03",
+      "expected_id": "a",
+      "category": "direct",
+      "rationale": "Only a gives the twelve-file limit; b covers pinning and c covers path display."
+    },
+    {
+      "id": "direct-04",
+      "expected_id": "c",
+      "category": "direct",
+      "rationale": "Only c gives the command-palette shortcut; b and a open different navigation tools."
+    },
+    {
+      "id": "direct-05",
+      "expected_id": "c",
+      "category": "direct",
+      "rationale": "Only c locates the Light and Dark choices; b and a adjust size or spacing."
+    },
+    {
+      "id": "direct-06",
+      "expected_id": "b",
+      "category": "direct",
+      "rationale": "Only b specifies the refresh interval; c describes status and a describes indexed scope."
+    },
+    {
+      "id": "direct-07",
+      "expected_id": "b",
+      "category": "direct",
+      "rationale": "Only b lists supported formats; c covers zoom and a covers captions."
+    },
+    {
+      "id": "direct-08",
+      "expected_id": "b",
+      "category": "direct",
+      "rationale": "Only b sorts by due date; c filters completion status and a adds an owner column."
+    },
+    {
+      "id": "direct-09",
+      "expected_id": "a",
+      "category": "direct",
+      "rationale": "Only a identifies export completion status; b configures page size and c navigates headings."
+    },
+    {
+      "id": "direct-10",
+      "expected_id": "a",
+      "category": "direct",
+      "rationale": "Only a supplies the suggested filename; b and c describe other save-related metadata."
+    },
+    {
+      "id": "direct-11",
+      "expected_id": "c",
+      "category": "direct",
+      "rationale": "Only c toggles the sidebar; b and a toggle other window regions."
+    },
+    {
+      "id": "direct-12",
+      "expected_id": "a",
+      "category": "direct",
+      "rationale": "Only a explains the hollow circle; c and b explain different tab symbols."
+    },
+    {
+      "id": "paraphrase-01",
+      "expected_id": "b",
+      "category": "paraphrase",
+      "rationale": "Only b limits writing width; c enlarges controls and a dims text without changing width."
+    },
+    {
+      "id": "paraphrase-02",
+      "expected_id": "a",
+      "category": "paraphrase",
+      "rationale": "Only a provides a navigable heading hierarchy; b and c organize images or revisions."
+    },
+    {
+      "id": "paraphrase-03",
+      "expected_id": "c",
+      "category": "paraphrase",
+      "rationale": "Only c compares current and saved content; a and b report counts or file properties."
+    },
+    {
+      "id": "paraphrase-04",
+      "expected_id": "c",
+      "category": "paraphrase",
+      "rationale": "Only c displays two documents simultaneously; a and b retain a single content pane."
+    },
+    {
+      "id": "paraphrase-05",
+      "expected_id": "a",
+      "category": "paraphrase",
+      "rationale": "Only a restricts results by the .md extension; b and c change matching case or presentation."
+    },
+    {
+      "id": "paraphrase-06",
+      "expected_id": "a",
+      "category": "paraphrase",
+      "rationale": "Only a links editor movement to the preview; b and c change preview appearance."
+    },
+    {
+      "id": "paraphrase-07",
+      "expected_id": "b",
+      "category": "paraphrase",
+      "rationale": "Only b makes export alerts visual and silent; c and a explicitly leave export announcements unchanged."
+    },
+    {
+      "id": "paraphrase-08",
+      "expected_id": "b",
+      "category": "paraphrase",
+      "rationale": "Only b distinguishes spaces and tabs with visible markers; c and a change width or add a ruler."
+    },
+    {
+      "id": "lexical-01",
+      "expected_id": "c",
+      "category": "lexical_distractor",
+      "rationale": "Only c exposes the latest failed job's diagnostic cause; b and a discuss badges or notification preferences."
+    },
+    {
+      "id": "lexical-02",
+      "expected_id": "b",
+      "category": "lexical_distractor",
+      "rationale": "Only b reports the active document's complete location; c and a concern other files or search results."
+    },
+    {
+      "id": "lexical-03",
+      "expected_id": "a",
+      "category": "lexical_distractor",
+      "rationale": "Only a reports the active file's detected character format; b and c discuss defaults or general definitions."
+    },
+    {
+      "id": "lexical-04",
+      "expected_id": "b",
+      "category": "lexical_distractor",
+      "rationale": "Only b counts the highlighted range; c changes its color and a estimates whole-document pagination."
+    }
+  ]
+}

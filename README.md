@@ -2,7 +2,7 @@
 
 Independent local typed-decision integration for Codex and explicitly configured consumers: data preparation, native inference, evidence-bound advice, and bounded browser execution. Separate from the original novel-world project.
 
-**Status, 2026-10-21:** source snapshot for [XLGXB/jev-local](https://github.com/XLGXB/jev-local). The full **F01–F20 goal remains incomplete**. Implemented interfaces and isolated native/consumer tests do not establish semantic qualification, production readiness, or end-to-end speed gains. See [status](docs/PROJECT_STATUS.md) and [publishing](docs/PUBLISHING.md).
+**Status, 2026-10-21:** initial source published to [XLGXB/jev-local](https://github.com/XLGXB/jev-local) at [b31492c](https://github.com/XLGXB/jev-local/commit/b31492c131315f73daad3f8f06a6bb430c1d93e2). Project code is licensed under [Apache-2.0](LICENSE). The full **F01–F20 goal remains incomplete**. Implemented interfaces and isolated native/consumer tests do not establish semantic qualification, production readiness, or end-to-end speed gains. See [status](docs/PROJECT_STATUS.md) and [publishing](docs/PUBLISHING.md).
 
 ## Project map
 
@@ -19,6 +19,14 @@ Independent local typed-decision integration for Codex and explicitly configured
 | [docs](docs/README.md) | Interface reference, evidence limits, provenance and historical design index |
 
 Actual data/datasets, models, vendor/imported snapshots, runtime evidence and virtual environments are local-only. A narrowly reviewed exception retains two tiny format-test JSONL examples and the sample schema; see [publishing](docs/PUBLISHING.md). Preserve original archives and evidence in place. Source alone does not include a runnable model/environment.
+
+## Public evidence and contribution
+
+- [Evidence-ranking demo](demos/evidence_ranking/README.md): 24 new public synthetic questions, 72 candidates, real local CPU inference with pinned Qwen3-Reranker-0.6B. Top-1 was **20/24**, versus **14/24** for the lexical baseline. Direct cases: 12/12; paraphrases: 8/8; lexical distractors: **0/4**, with all four gold candidates ranked third. Failures are retained.
+- [Historical experiments](docs/experiments/README.md): separate summaries of **19 actual SFT runs (14 Kev, 5 Laya)**, a CLM baseline, and mechanical/unexecuted appendices. Only reviewed configuration, metrics and summary hashes are published; original private examples, weights and raw logs remain local.
+- [Contributing](CONTRIBUTING.md) and issue forms support reproducible reports. Dependency-light Windows/Linux [CI](.github/workflows/ci.yml) is configured; configuration alone is not evidence of a successful hosted run. The separately authorized manual cloud-CPU demo reproduction has not yet been executed.
+
+The demo uses a pretrained model without additional training on these small synthetic samples and is uncalibrated; it is not representative semantic qualification or a time-saving result. Historical experiment dates do not imply recent continuous maintenance. Publication, CI configuration and local tests do not establish independent community adoption, Stars/Forks or outside-user evidence.
 
 ## Environment and entrypoints
 
@@ -79,4 +87,4 @@ These are entrypoints, not results from the 2026-10-21 documentation pass. Brows
 - Reject stale/malformed evidence; keep status/cancel and uncertain-effect quarantine. Credentials/signing keys stay outside model-visible context. Secret screening is best-effort, not permission to send private material externally.
 - No service, global MCP registration, model download or account operation is installed automatically.
 
-The project owner confirmed authorization to publish this source snapshot on 2026-10-21. The three original imported archives contain no located `LICENSE` or `NOTICE`; that confirmation is not an independent license audit or a blanket license grant to downstream users. No project license has been selected. See [provenance](docs/PROVENANCE.md), [publishing boundary](docs/PUBLISHING.md), and [AGENTS.md](AGENTS.md).
+The rights holder confirmed the right to license project code, including the three generated ZIP inputs, under Apache-2.0 on 2026-10-21. See [LICENSE](LICENSE), [NOTICE](NOTICE), [licensing decision and limits](docs/LICENSING.md), [provenance](docs/PROVENANCE.md), and [publishing boundary](docs/PUBLISHING.md). This records the owner's decision, not independent legal clearance; separately obtained dependencies, models and datasets retain their own terms. [AGENTS.md](AGENTS.md) retains the operational boundary.

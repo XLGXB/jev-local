@@ -7,6 +7,7 @@ name = "jevlocal"
 version = "0.2.1"
 description = "Independent typed-decision integration with evidence-bound runtime and bounded browser execution"
 readme = "README.md"
+license = { file = "LICENSE" }
 requires-python = ">=3.11"
 # 核心层零依赖：schema / text / labels / permutation / metrics / splits / test_vault
 # 只用标准库，因此数据侧可以在未装 torch 的机器上自测。
