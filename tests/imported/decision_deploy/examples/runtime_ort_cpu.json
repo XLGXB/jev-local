@@ -1,0 +1,1 @@
+{"mode":"ort","backend":"laya","bundle":"/absolute/path/to/bundle-laya","provider":"cpu","active_buckets":[512],"cpu_threads":4,"profile":false}

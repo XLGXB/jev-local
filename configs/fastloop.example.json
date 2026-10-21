@@ -1,0 +1,29 @@
+{
+  "schema_version": 2,
+  "project_id": "jevlocal-isolated-lab",
+  "controller": "fastloop",
+  "control_mode": "isolated-cdp",
+  "cdp": "http://127.0.0.1:0",
+  "decision_service": "http://127.0.0.1:0",
+  "state_dir": "D:/Projects/JevLocal/runtime/browser",
+  "approval_public_key": "D:/Projects/JevLocal/runtime/approval-public.pem",
+  "qualification": {
+    "receipt": "D:/Projects/JevLocal/runtime/qualification/receipt.json",
+    "calibration_path": "D:/Projects/JevLocal/runtime/qualification/calibration.json",
+    "evaluation_path": "D:/Projects/JevLocal/runtime/qualification/evaluation.json",
+    "policy_path": "D:/Projects/JevLocal/configs/qualification.example.json",
+    "dataset_dir": "D:/Projects/JevLocal/runtime/frozen-dataset"
+  },
+  "tasks": {
+    "reviewed_fixture": {
+      "goal": "Only inspect the separately authorized local fixture",
+      "allowed_origins": ["http://127.0.0.1:8089"],
+      "execution_approved": false,
+      "expected_runtime_fingerprint": "UNQUALIFIED",
+      "min_probability": 0.99,
+      "verifier": {"selector": "#done", "text": "Complete"},
+      "max_steps": 12,
+      "max_scrolls": 8
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "cdp":"http://127.0.0.1:9222",
+  "decision_service":"http://127.0.0.1:8787",
+  "evidence_dir":"/absolute/path/to/private-browser-receipts",
+  "tasks":{
+    "read_notifications_demo":{
+      "goal":"打开项目设置的通知页面，读取状态；不修改设置。",
+      "allowed_origins":["http://127.0.0.1:8089"],
+      "observation_selector":"#app",
+      "max_observation_chars":3000,
+      "max_actions":8,"deadline_ms":15000,"model_timeout_ms":5000,
+      "execution_approved":false,
+      "expected_runtime_fingerprint":"REPLACE_AFTER_QUALIFICATION",
+      "min_probability":0.99,
+      "actions":[
+        {"id":"open_settings","description":"打开项目设置","selector":"#open-settings","expected_text":"项目设置","postcondition_selector":"#notifications"},
+        {"id":"open_notifications","description":"读取通知设置","selector":"#notifications","expected_text":"通知设置","postcondition_selector":"#status"}
+      ],
+      "verifier":{"selector":"#status","expected_text":"通知：已启用"}
+    }
+  }
+}

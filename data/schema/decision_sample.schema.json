@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:jevlocal:decision_sample:v1",
+  "title": "jevlocal decision sample v1",
+  "description": "唯一真源：决策训练样本。所有抽取器产出这个形状；所有训练器只消费这个形状。",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sample_id", "domain", "source", "state", "questions", "labels", "split", "provenance"],
+  "properties": {
+    "sample_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9\\-]{2,63}$" },
+    "domain": {
+      "type": "string",
+      "enum": ["browser_action", "stdout_prune", "tool_keepdrop", "routing", "other"]
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "ref"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["codex_session", "codex_history", "runtime_json", "browser_trace", "hand_authored", "synthetic"]
+        },
+        "ref": { "type": "string", "description": "可追溯定位：文件 + 行号 / record id / 段落锚" },
+        "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "captured_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "state": {
+      "type": "string",
+      "minLength": 1,
+      "description": "被评估的上下文。送进模型前由 text.fit_state 按预算裁剪。"
+    },
+    "questions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["qid", "type", "instructions"],
+        "properties": {
+          "qid": { "type": "string", "pattern": "^[A-Za-z0-9_]{1,40}$" },
+          "type": { "type": "string", "enum": ["noul", "choice", "score"] },
+          "instructions": { "type": "string", "minLength": 1 },
+          "criteria": {
+            "description": "noul: {true?:desc,false?:desc} | choice: {option: desc|null} | score: [level,...] 低到高",
+            "oneOf": [
+              { "type": "object", "additionalProperties": { "type": ["string", "null"] } },
+              { "type": "array", "items": { "type": "string" }, "minItems": 2, "maxItems": 255 }
+            ]
+          }
+        }
+      }
+    },
+    "labels": {
+      "type": "object",
+      "minProperties": 1,
+      "description": "键必须与 questions[].qid 一一对应",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["hard", "soft"],
+        "properties": {
+          "hard": {
+            "description": "noul: 0|1 | choice: 选项名 | score: 层级下标(从0)。不可回答时为 null。",
+            "type": ["integer", "string", "null"]
+          },
+          "soft": {
+            "description": "noul: [0,1] 的标量 | choice: {选项名: 概率} | score: [p0..p{K-1}]",
+            "oneOf": [
+              { "type": "number", "minimum": 0, "maximum": 1 },
+              { "type": "object", "additionalProperties": { "type": "number", "minimum": 0, "maximum": 1 } },
+              { "type": "array", "items": { "type": "number", "minimum": 0, "maximum": 1 }, "minItems": 2 }
+            ]
+          },
+          "unanswerable": {
+            "type": "boolean",
+            "default": false,
+            "description": "true 表示 state 里不存在判定证据，正确目标是均匀分布而非多数类"
+          },
+          "teacher": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "model": { "type": "string" },
+              "n_samples": { "type": "integer", "minimum": 1 },
+              "temperature": { "type": "number", "minimum": 0 },
+              "agreement": { "type": "number", "minimum": 0, "maximum": 1 },
+              "prompt_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+            }
+          }
+        }
+      }
+    },
+    "split": { "type": "string", "enum": ["train", "dev", "calib", "test", "ood"] },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["extractor", "extractor_version"],
+      "properties": {
+        "extractor": { "type": "string" },
+        "extractor_version": { "type": "string" },
+        "created_at": { "type": "string", "format": "date-time" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

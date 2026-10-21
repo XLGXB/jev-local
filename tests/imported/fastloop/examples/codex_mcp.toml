@@ -1,0 +1,10 @@
+# Merge into your existing configuration; do not overwrite it.
+[mcp_servers.fast_browser_v2]
+command = "/absolute/path/to/.venv/bin/python"
+args = ["-m", "fastloop.mcp_server"]
+env_vars = ["FASTLOOP_REGISTRY", "LOCAL_DECISION_TOKEN"]
+startup_timeout_sec = 20
+tool_timeout_sec = 45
+default_tools_approval_mode = "writes"
+# The executor receives the PUBLIC approval key through the registry only.
+# Never put the broker PRIVATE key in the MCP environment/workspace.

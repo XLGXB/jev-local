@@ -1,0 +1,21 @@
+# Explicit Qwen relevance aid
+
+This is a local, opt-in evidence **ranking suggestion**. It does not replace the lexical primary, filter evidence, execute tools, register MCP, or change JevLocal's Laya/Kev backends. Scores are uncalibrated two-token (`no`/`yes`) native logits, not truth or permission. A low score never means a candidate may be discarded.
+
+## Invocation
+
+Use the project environment for the parent CLI and the fixed Qwen CUDA environment for its child. The caller supplies a UTF-8 JSON input with `query`, `candidates`, `max_chars`, and optional `known_secrets`. Each candidate has `id`, `source`, `text`, and optional `start_line`. `source` is an attribution label; no source path is opened. No `store_dir` or callback is accepted.
+
+```text
+python -B -X utf8 D:/Projects/JevLocal/tools/qwen_rank.py --input D:/path/input.json --config D:/Projects/JevLocal/configs/qwen-reranker-0.6b.json --output D:/path/new-result.json --timeout 60
+```
+
+`--output` is optional; when present, it must name a new file in an existing directory and may not replace input or config. Public JSON is also printed to stdout. Input `max_chars` budgets **only the lexical primary**; the whole serialized public JSON has a separate 4 MiB hard cap. If the observed recommendation would exceed that cap, it becomes `unavailable` with reason `output_budget` while the unchanged primary remains; if even primary plus minimal status cannot fit, the invocation is rejected rather than truncating candidates. Set `--timeout` only within `(0,60]`; default is 60 seconds. The true lifecycle elapsed time is reported, not clamped: kill/reap uses one shared five-second cleanup wait budget after the deadline, not two successive five-second waits. Scheduling and filesystem I/O are not hard-real-time guarantees. Exit 0 means an observed recommendation; exit 2 means unavailable or rejected. The process never retries or falls back to another model. The parent uses the ordinary lexical `rank_evidence` algorithm without callback; if it returns `requires_larger_budget`, no Qwen child starts and recommendation is `unavailable` with reason `primary_budget`. Otherwise one hidden child uses only `D:/Projects/JevLocal/.venvs/qwen-cuda/Scripts/python.exe`. The child sets offline environment before imports, denies sockets, checks the configured asset manifest, and loads only local CUDA BF16 weights.
+
+## Result contract
+
+`primary` is the unchanged lexical result. `recommendation` is separate: it contains status, sanitized snapshot SHA-256, invocation ID, backend/revision/asset fingerprint/prompt version, measured judgments/forwards/returns and token lengths, and every candidate sorted by descending score then ID. Each score retains source SHA-256 and citation `start_line`; the full sanitized `{id,source,text}` candidate is rendered into the Qwen Document field. The fixed Noul instruction and both criteria are rendered into the prompt. All scores are independent across candidates; no cross-candidate softmax, threshold, or calibration is performed. Ties are ordered by ID. `execution_authorized`, `training_allowed`, and `primary_changed` are false.
+
+On model timeout, child error, invalid result, or cleanup failure, `recommendation.status` is `unavailable` and its ranking is empty. No zero scores or false labels are invented. Child stderr/stdout do not enter public JSON. The lifecycle records actual elapsed time, child PID, exit, timeout and reaping state. Only the invocation's verified absolute temporary directory is removed, and only after the child is reaped. If reaping cannot be verified, the private work directory is retained and its absolute path is reported as `retained_workdir`; no apparent success is published. A bad input or config is rejected before model start and does not attest to a valid result.
+
+The verified 80-item development comparison supported an opt-in ordering aid only; it did **not** qualify unseen semantic reliability or automatic filtering. This module makes no claim of Codex host integration, browser choice/control, or other JevLocal capability. A later frozen, small CUDA fixture is required before calling this live CLI path accepted on real weights; loader-free unit tests establish mechanics only.

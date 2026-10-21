@@ -1,0 +1,9 @@
+# Merge deliberately; never overwrite an existing Codex config.
+# Windows: use your venv's full python.exe path instead.
+[mcp_servers.local_decision_browser]
+command = "/absolute/path/to/.venv/bin/python"
+args = ["-m", "decision_deploy.mcp_server"]
+env_vars = ["LOCAL_DECISION_TOKEN", "LOCAL_DECISION_REGISTRY"]
+startup_timeout_sec = 20
+tool_timeout_sec = 30
+default_tools_approval_mode = "writes"

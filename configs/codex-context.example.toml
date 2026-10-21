@@ -1,0 +1,10 @@
+# Reference only. This file is NOT installed into Codex configuration.
+# Replace command with the explicitly approved isolated environment's python.exe.
+# The context tools are lexical baselines until a qualified local scoring route is connected.
+[mcp_servers.jevlocal_context]
+command = "D:\\Projects\\JevLocal\\.venv\\Scripts\\python.exe"
+args = ["-m", "jevlocal.integration.mcp_server"]
+
+[mcp_servers.jevlocal_context.env]
+PYTHONPATH = "D:\\Projects\\JevLocal\\src"
+JEVLOCAL_CONTEXT_STORE = "D:\\Projects\\JevLocal\\runtime\\context"

@@ -1,0 +1,95 @@
+{
+  "schema_version": 2,
+  "project_id": "local-browser-demo",
+  "cdp": "http://127.0.0.1:9222",
+  "decision_service": "http://127.0.0.1:8787",
+  "state_dir": "/absolute/path/private-fastloop-state",
+  "approval_public_key": "/absolute/path/approval-public.pem",
+  "tasks": {
+    "demo_profile": {
+      "goal": "滚动找到资料入口，填写已批准的普通资料并打开本地预览，不提交。",
+      "allowed_origins": [
+        "http://127.0.0.1:8089"
+      ],
+      "execution_approved": false,
+      "expected_runtime_fingerprint": "UNQUALIFIED",
+      "min_probability": 0.99,
+      "clicks": [
+        {
+          "id": "open",
+          "selector": "#open",
+          "label": "打开资料表单",
+          "expected_text": "打开资料表单",
+          "postcondition": {
+            "selector": "#profile"
+          }
+        },
+        {
+          "id": "preview",
+          "selector": "#preview",
+          "label": "显示本地预览，不提交",
+          "expected_text": "本地预览",
+          "requires_forms": [
+            "profile"
+          ],
+          "postcondition": {
+            "selector": "#ready",
+            "text": "预览已准备，尚未提交"
+          }
+        }
+      ],
+      "scrolls": [
+        {
+          "id": "list",
+          "selector": "#list",
+          "item_selector": ".row",
+          "item_key_attr": "data-key"
+        }
+      ],
+      "forms": [
+        {
+          "id": "profile",
+          "selector": "#profile",
+          "label": "普通资料表单",
+          "input_effects_reviewed": false,
+          "fields": [
+            {
+              "id": "display_name",
+              "selector": "#display_name",
+              "label": "称呼",
+              "kind": "text",
+              "max_chars": 80
+            },
+            {
+              "id": "note",
+              "selector": "#note",
+              "label": "备注",
+              "kind": "textarea",
+              "max_chars": 400
+            },
+            {
+              "id": "language",
+              "selector": "#language",
+              "label": "语言",
+              "kind": "select",
+              "choices": [
+                "zh",
+                "en"
+              ]
+            },
+            {
+              "id": "notify",
+              "selector": "#notify",
+              "label": "接收通知",
+              "kind": "checkbox"
+            }
+          ]
+        }
+      ],
+      "verifier": {
+        "selector": "#ready",
+        "text": "预览已准备，尚未提交"
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+{"mode":"ort","backend":"laya","bundle":"/absolute/path/to/bundle-laya","provider":"trt","active_buckets":[512],"fp16":true,"workspace_bytes":2147483648,"cache_dir":"/absolute/path/to/engine-cache","allow_cpu_fallback":false,"profile":true,"profile_dir":"/absolute/path/to/profiles"}

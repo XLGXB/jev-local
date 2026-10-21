@@ -1,0 +1,108 @@
+{
+  "_comment": "部署层参数。版本事实已于 2026-09-22 查证，见 docs/DEPLOYMENT.md §1。",
+  "_paths_note": "本机 C 剩 42GB、D 剩 76GB 偏紧；引擎与模型缓存放 E/F/G。",
+
+  "export": {
+    "spec": {
+      "head": "slots",
+      "n_slots": 256,
+      "max_seq_len": 512,
+      "max_batch": 8,
+      "embed_dim": 768,
+      "dtype": "fp16"
+    },
+    "opset": 17,
+    "_note_opset": "ONNX-TensorRT 解析器支持到 opset 25，官方支持 opset 9+；17 是安全且够用的取值",
+    "dynamic_axes": {
+      "input_ids": "batch, seq",
+      "attention_mask": "batch, seq",
+      "read_index": "batch only",
+      "slot_logits": "batch only",
+      "_note": "n_slots 是常量维度——K 变化不改变图，引擎无需重建"
+    },
+    "artifacts_dir": "E:/jevlocal/artifacts",
+    "_note_artifacts": "权重与引擎写 E 盘，避免把 D 盘那 76GB 吃掉"
+  },
+
+  "tensorrt": {
+    "enabled": false,
+    "_note_enabled": "默认关。先跑 ONNX + ORT CUDA EP 拿到基线，再决定是否上 TRT——理由见 DEPLOYMENT.md §6",
+    "trtexec": "trtexec",
+    "profile": {
+      "minShapes": "input_ids:1x64,attention_mask:1x64,read_index:1",
+      "optShapes": "input_ids:2x256,attention_mask:2x256,read_index:2",
+      "maxShapes": "input_ids:8x512,attention_mask:8x512,read_index:8"
+    },
+    "builder_optimization_level": 3,
+    "timing_cache": true,
+    "cache_key_components": ["tensorrt_version", "compute_cap", "cuda_version"],
+    "_note_cache": "三者任一变化都必须重建引擎；加载旧引擎会直接失败或给出错误结果",
+    "install_mode": "full",
+    "_note_install": "lean/dispatch 运行时**不能构建**引擎，本机需要 full（约 2-3GB）"
+  },
+
+  "onnxruntime": {
+    "preferred_providers": ["TensorrtExecutionProvider", "CUDAExecutionProvider", "CPUExecutionProvider"],
+    "intra_op_threads": 1,
+    "enable_cuda_graph": true,
+    "_note_cuda_graph": "小模型 batch=1 时是**启动开销主导**；CUDA Graph 能把它压掉。前提是形状固定——所以统一 pad 到 max_seq_len，牺牲少量算力换掉启动开销。这比上 TensorRT 的收益更直接。",
+    "enable_mem_pattern": true
+  },
+
+  "serve": {
+    "bind": "127.0.0.1",
+    "port": 0,
+    "_note_port": "0 = 系统分配。**不要硬编码端口**",
+    "temperature": 1.0,
+    "_note_temperature": "导出后必须重拟合，不能沿用训练侧那个（见 parity）",
+    "shadow": true,
+    "_note_shadow": "先影子运行：只决策并记账，不改变行为",
+    "max_body_bytes": 4194304,
+    "max_request_tokens": 30000,
+    "max_state_tokens": 4000,
+    "decision_log": "data/processed/decision_log.jsonl",
+    "_note_log": "只记元数据：qid / 类型 / K / 所选下标 / confidence / 延迟。**不记 state 与问题文本**"
+  },
+
+  "browser": {
+    "cdp_port": 9222,
+    "viewport": { "width": 1120, "height": 780 },
+    "max_steps": 12,
+    "live": false,
+    "_note_live": "默认 dry-run；必须显式 --live 才真的操作页面",
+    "allow_irreversible": false,
+    "settle_ms": { "combobox": 200, "other": 50 },
+    "_note_settle": "固定 sleep 是延迟主要来源；按动作类型给最小必要等待",
+    "max_actions": 250,
+    "max_visible_text_chars": 6000,
+    "_note_text": "只送视口内可见文本；离屏正文不进 context",
+    "state_token_budget": 6000,
+
+    "engine": "standalone-cdp",
+    "_note_engine": "standalone：自己开 CDP 连接（需要 chrome --remote-debugging-port）。集成模式应改为【客户端】接项目 scripts/chrome_extension_sidecar_channel.mjs 指向的可信 Node REPL 浏览器服务——它拒绝 spawn 出来的 node 进程，所以不能自己起栈。"
+  },
+
+  "gates": {
+    "parity": {
+      "max_abs_logit_delta": 0.05,
+      "min_argmax_agreement": 0.995,
+      "min_top1_agreement": 0.99,
+      "_note": "不过这三条就说明导出有问题（最常见：忘了合并 LoRA、读数位偏移算错）"
+    },
+    "calibration": {
+      "must_refit_temperature": true,
+      "max_ece_after": 0.03,
+      "_note": "量化/导出后必须重拟合温度并复核 ECE；决策模型的校准一旦坏掉，它的用途就没了——这比掉 1% 准确率严重得多"
+    },
+    "latency": {
+      "decision_p50_ms": 40,
+      "decision_p95_ms": 80,
+      "_note": "含全部问题的**一次**前向"
+    },
+    "browser": {
+      "max_cdp_calls_per_cycle": 5,
+      "reference_cdp_calls_per_task": 101,
+      "_note_ref": "browser-use/jev-ultrafast 公开测量：同任务 1092 → 101"
+    }
+  }
+}

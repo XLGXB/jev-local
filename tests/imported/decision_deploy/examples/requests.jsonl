@@ -1,0 +1,1 @@
+{"state": {"goal": "读取通知设置，不修改设置。", "visible_text": "项目设置。通知设置按钮可用。"}, "questions": {"next_action": {"type": "choice", "instructions": "选择下一步合法动作；不确定时交还主控。", "criteria": {"open_notifications": "打开通知设置", "needs_host": "信息不足，交还主控"}}}}

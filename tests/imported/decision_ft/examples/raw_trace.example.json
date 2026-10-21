@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "trace_id": "demo-trace-001",
+  "step_id": 3,
+  "before": {
+    "goal": "读取通知设置；不得修改或保存。",
+    "observation_id": "obs-17",
+    "page": "项目设置首页",
+    "visible_controls": [
+      {
+        "id": "e12",
+        "text": "通知设置",
+        "effect": "只打开设置页面"
+      },
+      {
+        "id": "e13",
+        "text": "账户信息",
+        "effect": "只打开账户信息页面"
+      }
+    ],
+    "permissions": [
+      "navigate",
+      "read"
+    ]
+  },
+  "candidate_actions": {
+    "open_notifications": "点击 e12，打开通知设置",
+    "open_account": "点击 e13，打开账户信息",
+    "needs_host": "交回主控，不执行动作"
+  },
+  "executed_action": "open_notifications",
+  "after": {
+    "page": "通知设置",
+    "outcome": "observed_success"
+  },
+  "verification": {
+    "source": "human_verified",
+    "correct_next_action": "open_notifications",
+    "evidence_ref": "demo-only/not-a-real-receipt"
+  },
+  "note": "这是格式示例，不是真实用户轨迹。after/executed_action/verification 不进入当步模型输入。"
+}

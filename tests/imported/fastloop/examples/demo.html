@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><title>Local browser FSM test</title>
+<style>body{font:16px sans-serif}#list{width:600px;height:240px;overflow:auto;border:1px solid} .row{height:120px} form{padding:16px}label{display:block;margin:12px}#profile{display:none}</style>
+<h1>本地演示：滚动 → 打开表单 → 授权填写 → 预览</h1>
+<div id="list"><div class="row" data-key="a">第一项</div><div class="row" data-key="b">第二项</div><div class="row" data-key="c">第三项</div><button id="open" type="button">打开资料表单</button></div>
+<form id="profile" onsubmit="event.preventDefault(); window.submissions=(window.submissions||0)+1;">
+ <label>称呼 <input id="display_name" type="text" required maxlength="80"></label>
+ <label>备注 <textarea id="note" maxlength="400"></textarea></label>
+ <label>语言 <select id="language"><option value="zh">中文</option><option value="en">English</option></select></label>
+ <label><input id="notify" type="checkbox">接收通知</label>
+ <button id="preview" type="button">本地预览</button>
+ <button id="submit" type="submit">提交（本工具禁止）</button>
+</form>
+<p id="ready" hidden>预览已准备，尚未提交</p>
+<script>
+window.submissions=0;
+document.querySelector('#open').onclick=()=>{document.querySelector('#list').style.display='none';document.querySelector('#profile').style.display='block'};
+document.querySelector('#preview').onclick=()=>{document.querySelector('#ready').hidden=false};
+</script>

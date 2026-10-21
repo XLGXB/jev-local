@@ -1,0 +1,1 @@
+{"mode":"native","backend":"laya","checkpoint":"/absolute/path/to/laya-finetuned","device":"cpu","weights_dtype":"fp32","amp":"none"}

@@ -1,0 +1,105 @@
+{
+  "_comment": "ModernBERT（Laya / openJev 范式）路线。数字来源：两份 README 与 RUNBOOK，凡是标注 OUR_DECISION 的是本仓库的选择。",
+  "path": "modernbert",
+
+  "data": {
+    "schema": "data/schema/decision_sample.schema.json",
+    "processed_dir": "data/processed",
+    "train": "data/processed/modernbert.train.jsonl",
+    "dev": "data/processed/modernbert.dev.jsonl",
+    "calib": "data/processed/modernbert.calib.jsonl",
+    "test": "data/processed/modernbert.test.jsonl",
+    "ood": "data/processed/modernbert.ood.jsonl",
+    "split_seed": 20260922,
+    "ratios": { "train": 0.70, "dev": 0.10, "calib": 0.10, "test": 0.10 },
+    "_note_grouping": "按 state_sha256 分组切分；同一段上下文不得跨切分（见 splits.assign_splits）"
+  },
+
+  "template": {
+    "layout": "[CLS] <type> <instructions> [SEP] [MASK]<opt0> [MASK]<opt1> ... [SEP] <state> [SEP]",
+    "marker": "[MASK]",
+    "include_descriptions": false,
+    "head_max_len": 192,
+    "head_max_len_multilingual": 256,
+    "max_len": 512,
+    "_note_head_budget": "Laya 默认 head 192(英)/256(多语言)；openJev 把总上下文从 1024 砍到 512 以避开训练分布之外的位置漂移",
+    "_note_option_ceiling": "选项数 >20 时不要硬塞：固定 head 预算下 77 个选项每个只剩 3-4 token，准确率会崩（Banking77: Jev 0.870 vs Laya 0.425）。走 predict_shortlist 或拆问。"
+  },
+
+  "backbone": {
+    "primary": "answerdotai/ModernBERT-base",
+    "params_m": 149.6,
+    "alternates": {
+      "answerdotai/ModernBERT-large": { "params_m": 395.9, "note": "需 --optim8bit --grad_checkpoint 才塞进 12GB" },
+      "convaiinnovations/laya-multilingual": { "params_m": 322, "note": "mmBERT-base，100+ 语言；中文场景的备选" }
+    },
+    "_note_chinese_risk": "OUR_DECISION 未定：ModernBERT 偏英文，本项目负载是中文。P0 必须先建中文评测集再选主干。"
+  },
+
+  "train": {
+    "epochs": 8,
+    "batch_size": 8,
+    "accum": 2,
+    "lr": 2e-05,
+    "dtype": "bf16",
+    "_note_dtype": "本机 4070 SUPER 算力 8.9，bf16 可用（1660 Ti 那种 7.5 只能用 fp16）",
+    "optim8bit": false,
+    "grad_checkpoint": false,
+    "freeze_backbone": false,
+    "seed": 20260922,
+
+    "loss_weights": {
+      "soft": 1.0,
+      "brier": 0.5,
+      "hard": 0.1,
+      "perm": 0.5,
+      "ordinal": 0.0,
+      "_note": "brier 与 perm 必须在 dev 上扫，不要照抄。openJev 扫的是 brier ∈ {0,0.25,0.5,1.0}、perm ∈ {0,0.5,1.0}；perm 默认 0.5。"
+    },
+
+    "permutation": {
+      "group_size": 4,
+      "seeds": { "train": 20260922, "eval": 20261001 },
+      "_note": "训练与评测必须用不同 seed，否则评测用的排列是训练见过的"
+    },
+
+    "gates": {
+      "dev_accuracy_base": 0.70,
+      "dev_accuracy_large": 0.76,
+      "dev_brier_large_max": 0.12,
+      "_note": "openJev 的硬门：base 若过不了 0.700，问题在数据通路或目标函数，不在容量——换大 backbone 也救不回来"
+    }
+  },
+
+  "calibration": {
+    "type_routed_temperature": true,
+    "min_samples_per_type": 50,
+    "correctness_head": {
+      "hidden": 32,
+      "n_folds": 5,
+      "epochs": 200,
+      "lr": 0.01,
+      "_note_must_be_oof": "正确性头必须 out-of-fold 训练，否则 ECE 好看但无意义"
+    }
+  },
+
+  "rlcd": {
+    "enabled": true,
+    "reward": "brier",
+    "_note_reward": "可选 log | brier，两者都是严格 proper。绝不可用 argmax 命中率。",
+    "group_size": 6,
+    "beta_kl": 0.02,
+    "lr": 1e-06,
+    "epochs": 4,
+    "reference_checkpoint": "artifacts/sft-final",
+    "_note_kl": "必须锚到冻结的 SFT 快照，否则策略会漂向'分布更极端但奖励略高'的解：准确率不掉，校准全坏",
+    "_note_laya": "Laya 用的是 proper-scoring-rule rewards + GRPO-style policy gradient；2xT4 上 4 epoch / 约 30k 问题约 4-5 小时"
+  },
+
+  "eval": {
+    "receipt_path": "data/processed/test_reads.jsonl",
+    "require_confirm": true,
+    "report_path": "reports/modernbert_candidate.json",
+    "_note_mandatory": "报告缺任何一项都会被 metrics.assert_complete_report 拒绝"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "required_types": ["choice", "score", "noul"],
+  "min_calibration_per_type": 50,
+  "min_evaluation_per_type": 100,
+  "min_evaluation_total": 1200,
+  "min_action_decisions": 1000,
+  "min_accepted_actions": 1000,
+  "min_accuracy": 0.8,
+  "max_nll_target": 0.8,
+  "max_brier_target": 0.4,
+  "max_ece_verified": 0.03,
+  "max_rps_target": 0.1,
+  "max_score_mean_mae_target": 0.1,
+  "action_confidence_threshold": 0.99,
+  "max_action_error_rate": 0.01,
+  "min_action_coverage": 0.1,
+  "max_parity_logit_abs": 0.001,
+  "max_parity_probability_abs": 0.0001,
+  "min_parity_top1": 0.995,
+  "min_parity_decisions": 100
+}

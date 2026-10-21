@@ -1,0 +1,88 @@
+# Local datasets, models and experiment evidence stay on this machine.
+/data/*
+!/data/schema/
+/data/schema/*
+!/data/schema/decision_sample.schema.json
+!/data/examples/
+/data/examples/*
+# These two three-record format fixtures are used by tests/test_core.py.
+!/data/examples/modernbert.train.jsonl
+!/data/examples/qwen_kev.train.jsonl
+/datasets/
+/models/
+/runtime/
+/artifacts/
+/runs/
+/reports/
+/.codex-handoff/
+/.jevlocal-promotion.json
+
+# Downloaded code and immutable imported archives retain their local provenance.
+# Their exclusion does not resolve the rights of code integrated into src/.
+/vendor/
+/third_party/
+
+# Machine-specific runtime configuration; examples remain versionable.
+/configs/passive-runtime.original-laya.json
+/configs/*.local.json
+/configs/*.local.toml
+
+# Environments, build output and caches.
+.venv/
+.venvs/
+venv/
+node_modules/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.cache/
+/build/
+/dist/
+.coverage
+.coverage.*
+htmlcov/
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+
+# Credentials and private signing material. Never force-add these paths.
+.env
+.env.*
+!.env.example
+!.env.sample
+secrets/
+credentials/
+credentials*.json
+*.key
+*.pem
+*.p12
+*.pfx
+*.token
+id_rsa
+id_ed25519
+*_private_key*
+
+# Model/binary/database outputs must not leak from an unexpected directory.
+*.safetensors
+*.gguf
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.engine
+*.plan
+*.whl
+*.zip
+*.7z
+*.tar
+*.tar.gz
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm

@@ -1,0 +1,1 @@
+{"mode":"native","backend":"kev","checkpoint":"/absolute/path/to/kev-finetuned","device":"cuda","weights_dtype":"bf16","amp":"none"}

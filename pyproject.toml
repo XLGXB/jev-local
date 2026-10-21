@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jevlocal"
+version = "0.2.1"
+description = "Independent typed-decision integration with evidence-bound runtime and bounded browser execution"
+readme = "README.md"
+requires-python = ">=3.11"
+# 核心层零依赖：schema / text / labels / permutation / metrics / splits / test_vault
+# 只用标准库，因此数据侧可以在未装 torch 的机器上自测。
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/XLGXB/jev-local"
+Documentation = "https://github.com/XLGXB/jev-local/blob/main/docs/README.md"
+Issues = "https://github.com/XLGXB/jev-local/issues"
+
+[project.optional-dependencies]
+runtime = ["numpy>=1.26", "httpx>=0.28,<1", "fastapi>=0.115", "uvicorn>=0.30", "filelock>=3.16"]
+browser = ["playwright>=1.57,<2", "httpx>=0.28,<1", "pydantic>=2.10,<3", "cryptography>=41", "filelock>=3.16"]
+native = ["torch>=2.6", "safetensors>=0.5", "transformers>=4.48", "numpy>=1.26"]
+mcp = ["mcp>=1.28,<2"]
+train = [
+  "torch>=2.4",
+  "transformers>=4.48",
+  "numpy>=1.26",
+]
+# 导出台架。注意：onnxruntime-gpu 覆盖 Python 3.11–3.14（有 cp313-win_amd64 轮子）；
+# tensorrt 官方区间是 3.10–3.13，且需要 CUDA Toolkit 12.x/13.x + Windows 驱动 r537+ + full 安装模式。
+# 跑 `python -m jevlocal.export.to_onnx check-env` 会逐项告诉你缺什么。
+export = [
+  "onnx>=1.16",
+  "onnxruntime-gpu>=1.20",
+  "onnxsim>=0.4.36",
+  "numpy>=1.26",
+]
+export-trt = [
+  "tensorrt>=10.0",
+]
+# 服务层是纯标准库，不需要额外依赖（见 jevlocal/serve/system_one.py）。
+serve = [
+  "fastapi>=0.115",
+  "uvicorn>=0.32",
+]
+dev = [
+  "pytest>=8.0",
+  "jsonschema>=4.22",
+]
+
+[project.scripts]
+jevlocal-extract = "jevlocal.extract.codex_sessions:main"
+jevlocal = "jevlocal.integration.cli:main"
+jevlocal-decisions = "decision_deploy.server:main"
+jevlocal-browser = "fastloop.service:main"
+jevlocal-context-mcp = "jevlocal.integration.mcp_server:main"
+jevlocal-semdecide = "jevlocal.integration.semdecide_cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q --import-mode=importlib"
