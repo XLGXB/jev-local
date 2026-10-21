@@ -1,0 +1,615 @@
+{
+  "schema_version": 1,
+  "reviewed_at": "2026-10-21T10:51:08Z",
+  "published_on": "2026-10-21",
+  "scope": "Retrospective of selected retained local training summaries; not an exhaustive training history; no new training or evaluation.",
+  "source_artifacts_published": false,
+  "counts": {
+    "sft_stages": 19,
+    "kev_sft_stages": 14,
+    "laya_sft_stages": 5,
+    "sft_actual_updates": 9254,
+    "sft_actual_exports": 20,
+    "evaluation_only_stages": 1
+  },
+  "count_limit": "Operation counts are bookkeeping only, not quality, efficiency, benefit, or qualified-model totals. Mechanical probes and prospective operations are excluded.",
+  "stages": [
+    {
+      "id": "kev-mixed-gpu-sft-01",
+      "kind": "sft",
+      "report_path": "kev-mixed-gpu-sft-01.md",
+      "original_receipt_time": "2026-09-24T21:18:54.148Z",
+      "original_time_field": "at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-mixed-gpu-sft-01/root-verdict.json",
+          "sha256": "763f151c5707e47e3be60dcf1d83d2e89a049217d413160541a05d123547f060"
+        },
+        {
+          "path": "runtime/kev-mixed-gpu-sft-01/contract.json",
+          "sha256": "4f7812928d29772b9068ae23f4d14117b26a6fdf391e9099e3abf3928914cdc3"
+        }
+      ],
+      "actual_updates": 96,
+      "actual_exports": 2,
+      "verdict": "training_mechanics_and_limited_dev_improvement_verified_final_evaluation_gate_not_met",
+      "partition_counts": {
+        "train_rows": 384,
+        "train_atoms": null,
+        "development_atoms": 96,
+        "retention_atoms": null
+      },
+      "planned_epochs": 2,
+      "publication_commit": "8b4289d860f09d2ffb329cf93932c11ebde409cb"
+    },
+    {
+      "id": "kev-state-json-sft-01",
+      "kind": "sft",
+      "report_path": "kev-state-json-sft-01.md",
+      "original_receipt_time": "2026-09-24T23:03:33.433Z",
+      "original_time_field": "created_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-state-json-sft-01/root-verdict.json",
+          "sha256": "7ab2aafd881d10b01ca914e60a544e6aaa9e0d81af01afae38dc1a5791222ea1"
+        },
+        {
+          "path": "runtime/kev-state-json-sft-01/contract.json",
+          "sha256": "262593a7dc11596af4c7fa230489bb0eb2de58d2d1e9318e0a8dba6ffda9cad4"
+        }
+      ],
+      "actual_updates": 96,
+      "actual_exports": 2,
+      "verdict": "accepted_observed_synthetic_development_only",
+      "partition_counts": {
+        "train_rows": 384,
+        "train_atoms": null,
+        "development_atoms": 96,
+        "retention_atoms": null
+      },
+      "planned_epochs": 2,
+      "publication_commit": "61df05d0274db05a74af5f28dd7faa73cb12b2ee"
+    },
+    {
+      "id": "kev-ci-rule-sft-01",
+      "kind": "sft",
+      "report_path": "kev-ci-rule-sft-01.md",
+      "original_receipt_time": "2026-09-25T02:45:19.805Z",
+      "original_time_field": "created_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-ci-rule-sft-01/root-verdict.json",
+          "sha256": "d6f1d258d4f116fe5a3772b2ff06fb42275671e8d8fdea8e8a2b8524c891f6be"
+        },
+        {
+          "path": "runtime/kev-ci-rule-sft-01/contract.json",
+          "sha256": "3235c616a006a98d1aebaf848986bacd2a93d3d13e8eee72742265ae21a5960f"
+        }
+      ],
+      "actual_updates": 168,
+      "actual_exports": 2,
+      "verdict": "accepted_mechanics_and_limited_dev_improvement_only",
+      "partition_counts": {
+        "train_rows": 672,
+        "train_atoms": null,
+        "development_atoms": 168,
+        "retention_atoms": null
+      },
+      "planned_epochs": 2,
+      "publication_commit": "c40665322a32861812c46e0cd8fbb395de11501a"
+    },
+    {
+      "id": "kev-ci-rule-robustness-sft-02",
+      "kind": "sft",
+      "report_path": "kev-ci-rule-robustness-sft-02.md",
+      "original_receipt_time": "2026-09-25T07:10:28.688Z",
+      "original_time_field": "created_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-ci-rule-robustness-sft-02/root-verdict.json",
+          "sha256": "10d21d1f7f28faaa6c37897855f98be82e848efd306000fad39a4bd3cb15fb54"
+        },
+        {
+          "path": "runtime/kev-ci-rule-robustness-sft-02/contract.json",
+          "sha256": "7f02f859dd04a8a42feba5ffe6be21b79aac60235c846f1083e5e513e3004db7"
+        }
+      ],
+      "actual_updates": 566,
+      "actual_exports": 1,
+      "verdict": "terminal_verified_mechanics_quality_gate_failure",
+      "partition_counts": {
+        "train_rows": 4528,
+        "train_atoms": null,
+        "development_atoms": 168,
+        "retention_atoms": null
+      },
+      "planned_epochs": 1,
+      "publication_commit": "cf4d4d68bd3fab3b8cb99ba034ddd97ed6c496dd"
+    },
+    {
+      "id": "kev-question-diversity-sft-02",
+      "kind": "sft",
+      "report_path": "kev-question-diversity-sft-02.md",
+      "original_receipt_time": "2026-09-25T09:27:00.672Z",
+      "original_time_field": "at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-question-diversity-sft-02/root-verdict.json",
+          "sha256": "710c0f3d9ee08e649556cef68718e0af964ff8131525f09028d2fc4f093db022"
+        },
+        {
+          "path": "runtime/kev-question-diversity-sft-02/contract.json",
+          "sha256": "cf9fbe4b2d82c31b96daf2f2ad7df9d60a59adef8ab59e038bbf31415a1d10db"
+        }
+      ],
+      "actual_updates": 566,
+      "actual_exports": 1,
+      "verdict": "terminal_native_verified_quality_failed",
+      "partition_counts": {
+        "train_rows": 4528,
+        "train_atoms": null,
+        "development_atoms": 168,
+        "retention_atoms": null
+      },
+      "planned_epochs": 1,
+      "publication_commit": "d3ff18c6bf218c2aa09294219f693f6b11d79361"
+    },
+    {
+      "id": "kev-retention-question-bank-sft-01",
+      "kind": "sft",
+      "report_path": "kev-retention-question-bank-sft-01.md",
+      "original_receipt_time": "2026-09-25T11:05:20.267Z",
+      "original_time_field": "at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-retention-question-bank-sft-01/root-verdict.json",
+          "sha256": "6f5ac5f5cc8b0d5c699ac9a41885c3b855f14eea9ecd6a0cc1315abc2900b14d"
+        },
+        {
+          "path": "runtime/kev-retention-question-bank-sft-01/contract.json",
+          "sha256": "6354769a208c9f612107fa55eacb8aca318245caeaa6d3ebbf73c6d61e627812"
+        }
+      ],
+      "actual_updates": 3,
+      "actual_exports": 0,
+      "verdict": "terminal_native_failed_progress_publication",
+      "partition_counts": {
+        "train_rows": 4528,
+        "train_atoms": null,
+        "development_atoms": 168,
+        "retention_atoms": null
+      },
+      "planned_epochs": 1,
+      "publication_commit": "a57e97583c12115a28f7fda1e7aec6d99c62b96f"
+    },
+    {
+      "id": "kev-retention-question-bank-sft-02",
+      "kind": "sft",
+      "report_path": "kev-retention-question-bank-sft-02.md",
+      "original_receipt_time": "2026-09-25T12:08:53.154Z",
+      "original_time_field": "at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-retention-question-bank-sft-02/root-verdict.json",
+          "sha256": "133d3b8f7a20babb8e4b2979a83f6fab44822b4a17baa9289d7e125f77d001d9"
+        },
+        {
+          "path": "runtime/kev-retention-question-bank-sft-02/contract.json",
+          "sha256": "1b90a95e54f70f26f9adb6a9250e69d631ec0a8929fbeef9f76f3ce1b9d51084"
+        }
+      ],
+      "actual_updates": 566,
+      "actual_exports": 1,
+      "verdict": "terminal_mechanics_passed_quality_failed",
+      "partition_counts": {
+        "train_rows": 4528,
+        "train_atoms": null,
+        "development_atoms": 168,
+        "retention_atoms": null
+      },
+      "planned_epochs": 1,
+      "publication_commit": "0d1c428698131737c371f21b165d7365f01fdef2"
+    },
+    {
+      "id": "kev-external-question-bank-sft-01",
+      "kind": "sft",
+      "report_path": "kev-external-question-bank-sft-01.md",
+      "original_receipt_time": "2026-09-25T17:59:07.531Z",
+      "original_time_field": "at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-external-question-bank-sft-01/root-terminal-verdict.json",
+          "sha256": "3845562e2f6dde9dd137bb27e99390d2f479977cea175366aa5e2f11281402a6"
+        },
+        {
+          "path": "runtime/kev-external-question-bank-sft-01/contract.json",
+          "sha256": "44a5e47ae2656c7c83c2d505395245d5e2be3c4a217196c351e3f40d257e0d6d"
+        }
+      ],
+      "actual_updates": 737,
+      "actual_exports": 1,
+      "verdict": "terminal_failed_no_retry",
+      "partition_counts": {
+        "train_rows": 5890,
+        "train_atoms": null,
+        "development_atoms": 168,
+        "retention_atoms": null
+      },
+      "planned_epochs": 1,
+      "publication_commit": "a8a0f37a17735fd4373cc6b828d5873fc09dab45"
+    },
+    {
+      "id": "kev-oracle-context-sft-02",
+      "kind": "sft",
+      "report_path": "kev-oracle-context-sft-02.md",
+      "original_receipt_time": "2026-09-26T03:51:07.116Z",
+      "original_time_field": "adjudicated_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-oracle-context-sft-02/root-verdict.json",
+          "sha256": "e282a2d453632a5ff23042c6968010cd8180ecee6031105b3954630b0fc01c1a"
+        },
+        {
+          "path": "runtime/kev-oracle-context-sft-02/contract.json",
+          "sha256": "834a5b2f805f22e5a51047e423759ea7c92addabd6e304b62bfc7382a27e1bfe"
+        }
+      ],
+      "actual_updates": 168,
+      "actual_exports": 1,
+      "verdict": "terminal_reload_parity_failure_and_development_quality_rejection",
+      "partition_counts": {
+        "train_rows": 144,
+        "train_atoms": 336,
+        "development_atoms": 84,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "3232942989f4934e067145da5c7dc93f73a03b4c"
+    },
+    {
+      "id": "kev-mixed-retention-sft-01",
+      "kind": "sft",
+      "report_path": "kev-mixed-retention-sft-01.md",
+      "original_receipt_time": "2026-09-26T04:31:28.766Z",
+      "original_time_field": "created_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-mixed-retention-sft-01/root-verdict.json",
+          "sha256": "f7ad571e0650853b375d722606c927370406ec9618efa33bb840bf948345334a"
+        },
+        {
+          "path": "runtime/kev-mixed-retention-sft-01/contract.json",
+          "sha256": "a905ebf045162721f16ff2c033963d0ec9ba4bde7d23342697f6b416a0e6384a"
+        }
+      ],
+      "actual_updates": 504,
+      "actual_exports": 1,
+      "verdict": "terminal_completed_mechanics_development_quality_rejected",
+      "partition_counts": {
+        "train_rows": 816,
+        "train_atoms": 1008,
+        "development_atoms": 84,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "71d05411cd3f9f60ad847daa837e27c76bbb5798"
+    },
+    {
+      "id": "kev-coverage-checkpointed-sft-01",
+      "kind": "sft",
+      "report_path": "kev-coverage-checkpointed-sft-01.md",
+      "original_receipt_time": "2026-09-26T07:25:43.387Z",
+      "original_time_field": "created_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-coverage-checkpointed-sft-01/root-verdict.json",
+          "sha256": "e6c5fcc4a6a2f18eaf5d6b0bb0afc29b60824fcf3534372c642bf53dedc7b89c"
+        },
+        {
+          "path": "runtime/kev-coverage-checkpointed-sft-01/contract.json",
+          "sha256": "5f1a96c7740858235b51e2c231d82e9100c2bc4671bfd8065b1baba702d3520d"
+        }
+      ],
+      "actual_updates": 812,
+      "actual_exports": 1,
+      "verdict": "completed_native_mechanics_pass_quality_rejected_no_promotion_no_retry",
+      "partition_counts": {
+        "train_rows": 1366,
+        "train_atoms": 1622,
+        "development_atoms": 84,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "e315a8e767ebd3bf387427bdde3a96387f8c6f11"
+    },
+    {
+      "id": "kev-frozen-head-sft-02",
+      "kind": "sft",
+      "report_path": "kev-frozen-head-sft-02.md",
+      "original_receipt_time": "2026-09-26T10:50:39.597Z",
+      "original_time_field": "at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-frozen-head-sft-02/root-verdict.json",
+          "sha256": "afcd0be6b06a1113eea5df6debc6849f4788835d3e7fdceffb4b556cd16c4ee1"
+        },
+        {
+          "path": "runtime/kev-frozen-head-sft-02/contract.json",
+          "sha256": "4ef9f76f487491ec8349ce3f1b48fc948d04eac2c0ec0393f5eb6c134045239b"
+        }
+      ],
+      "actual_updates": 812,
+      "actual_exports": 1,
+      "verdict": "terminal_frozen_head_ablation_mechanics_passed_quality_rejected_no_retry",
+      "partition_counts": {
+        "train_rows": 1366,
+        "train_atoms": 1622,
+        "development_atoms": 84,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "f167ced704037fed1e01bc9aad872ea6b9aa6149"
+    },
+    {
+      "id": "kev-invariance-retention-sft-01",
+      "kind": "sft",
+      "report_path": "kev-invariance-retention-sft-01.md",
+      "original_receipt_time": "2026-09-26T13:10:29.817Z",
+      "original_time_field": "recorded_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-invariance-retention-sft-01/root-verdict.json",
+          "sha256": "274d2563375ebfcf6890b478de257057dd45ef6a7abbef077d96779fcbe721d2"
+        },
+        {
+          "path": "runtime/kev-invariance-retention-sft-01/contract.json",
+          "sha256": "3b8ad388ac1de691a86c0c3e8953aadcda96901f4b5c30c9140d8e5805d1d87b"
+        }
+      ],
+      "actual_updates": 812,
+      "actual_exports": 1,
+      "verdict": "terminal_invariance_mechanics_passed_quality_rejected_no_retry",
+      "partition_counts": {
+        "train_rows": 1366,
+        "train_atoms": 1622,
+        "development_atoms": 84,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "6298c47b70722078cbf6083c415d5220be1fb9d3"
+    },
+    {
+      "id": "kev-bound-wording-sft-01",
+      "kind": "sft",
+      "report_path": "kev-bound-wording-sft-01.md",
+      "original_receipt_time": "2026-09-26T20:15:16.171Z",
+      "original_time_field": "recorded_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-bound-wording-sft-01/root-verdict.json",
+          "sha256": "8f82595eccd9be8f851306933fc05a5935d9a5fb37147a86d7c1f764c0f3fbf9"
+        },
+        {
+          "path": "runtime/kev-bound-wording-sft-01/contract.json",
+          "sha256": "2bef8533d62cd6ad08982dcfbeb6ea03597471cbda5c8dca834492d1ae056045"
+        }
+      ],
+      "actual_updates": 528,
+      "actual_exports": 0,
+      "verdict": "terminal_wall_budget_exhausted_528_updates_no_quality_verdict_no_retry",
+      "partition_counts": {
+        "train_rows": 1366,
+        "train_atoms": 1622,
+        "development_atoms": 84,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "3a2ffbb6245a9d4bace1301bbe73504bfc55d84a"
+    },
+    {
+      "id": "laya-full-option-sft-01",
+      "kind": "sft",
+      "report_path": "laya-full-option-sft-01.md",
+      "original_receipt_time": "2026-09-27T03:32:27.019Z",
+      "original_time_field": "recorded_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/laya-full-option-sft-01/root-state.json",
+          "sha256": "86aef4293cf7da5b7add85c8bd5c2d12767f8393ed270161003c0f7b32c20e6f"
+        },
+        {
+          "path": "runtime/laya-full-option-sft-01/contract.md",
+          "sha256": "6d582937989945444916d4169911f8432f35aa672d9159839b84fdf40743821d"
+        }
+      ],
+      "actual_updates": 564,
+      "actual_exports": 1,
+      "verdict": "terminal_encoding_failure_after_training_and_reload",
+      "partition_counts": {
+        "train_rows": 1124,
+        "train_atoms": 1124,
+        "development_atoms": 85,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "a09d4d054217b1633042837a866c6044090dde28"
+    },
+    {
+      "id": "laya-sample-order-sft-01",
+      "kind": "sft",
+      "report_path": "laya-sample-order-sft-01.md",
+      "original_receipt_time": "2026-09-27T04:29:23.712Z",
+      "original_time_field": "recorded_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/laya-sample-order-sft-01/root-state.json",
+          "sha256": "72eff5ba79a8a8915e78e996bb903a01700f7b7342b940d420e1186c01429131"
+        },
+        {
+          "path": "runtime/laya-sample-order-sft-01/contract.md",
+          "sha256": "1e5eea35c94006d46fb2af2c2d32c7a3eae0483e7a59bd0462acfac77e9d5920"
+        }
+      ],
+      "actual_updates": 564,
+      "actual_exports": 1,
+      "verdict": "native_completed_postverified_semantic_gates_failed",
+      "partition_counts": {
+        "train_rows": 1124,
+        "train_atoms": 1124,
+        "development_atoms": 85,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "7c2e0ae3647e96a68d42d3aaca674df3dbbd4086"
+    },
+    {
+      "id": "laya-last-block-sft-01",
+      "kind": "sft",
+      "report_path": "laya-last-block-sft-01.md",
+      "original_receipt_time": "2026-09-27T05:13:05.702Z",
+      "original_time_field": "recorded_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/laya-last-block-sft-01/root-state.json",
+          "sha256": "1ba972cb0e4938b0a9b00126ac201264a8fc24fe793654705730a5c761ee03e0"
+        },
+        {
+          "path": "runtime/laya-last-block-sft-01/contract.md",
+          "sha256": "9783c9bb1518b4262fdeee5581659e6ccd4b4c339a60429ab903ffa61c3bf11a"
+        }
+      ],
+      "actual_updates": 564,
+      "actual_exports": 1,
+      "verdict": "native_completed_postverified_semantic_gates_failed_with_observed_fit_improvement",
+      "partition_counts": {
+        "train_rows": 1124,
+        "train_atoms": 1124,
+        "development_atoms": 85,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "8bd36ca695cfa0373ef8f2b831c86b203a2bd027"
+    },
+    {
+      "id": "laya-encoder-blocks-sft-01",
+      "kind": "sft",
+      "report_path": "laya-encoder-blocks-sft-01.md",
+      "original_receipt_time": "2026-09-27T05:59:03.369Z",
+      "original_time_field": "recorded_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/laya-encoder-blocks-sft-01/root-state.json",
+          "sha256": "e0d141f5f34a697168fa0690f547daf9f88912de415401df54c12ca06667002b"
+        },
+        {
+          "path": "runtime/laya-encoder-blocks-sft-01/contract.md",
+          "sha256": "63e563ae8e9c9763183916eff980c00660c495514978bb613521574833f144c8"
+        }
+      ],
+      "actual_updates": 564,
+      "actual_exports": 1,
+      "verdict": "native_completed_postverified_semantic_gates_failed_generalization_diagnosed",
+      "partition_counts": {
+        "train_rows": 1124,
+        "train_atoms": 1124,
+        "development_atoms": 85,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "e1940cbc0ca2d2f28fe9f429c4e3cbf3f76b7a64"
+    },
+    {
+      "id": "laya-question-bank-sft-01",
+      "kind": "sft",
+      "report_path": "laya-question-bank-sft-01.md",
+      "original_receipt_time": "2026-09-27T09:32:38.715Z",
+      "original_time_field": "recorded_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/laya-question-bank-sft-01/root-state.json",
+          "sha256": "22cc034f55b76a6fc7e5dd6081f02e6f4c9825e1cb8af0d36e9cef5577bfb28e"
+        },
+        {
+          "path": "runtime/laya-question-bank-sft-01/contract.md",
+          "sha256": "bb6122e6152cff80a20f2789ffc9cf05345e3c68e5ed73f492efd76a531d2bd4"
+        }
+      ],
+      "actual_updates": 564,
+      "actual_exports": 1,
+      "verdict": "terminal_mechanically_verified_semantically_unqualified",
+      "partition_counts": {
+        "train_rows": 1124,
+        "train_atoms": 1124,
+        "development_atoms": 85,
+        "retention_atoms": 168
+      },
+      "planned_epochs": 4,
+      "publication_commit": "b28fdc52fce120fbb54f1260a9fb4d95bdc43510"
+    },
+    {
+      "id": "clm-original-view-baseline-01",
+      "kind": "evaluation_only",
+      "report_path": "clm-original-view-baseline-01.md",
+      "original_receipt_time": "2026-09-27T09:07:13.471Z",
+      "original_time_field": "recorded_at",
+      "source_artifacts": [
+        {
+          "path": "runtime/clm-original-view-baseline-01/root-state.json",
+          "sha256": "5dae787915b9ec4d44e1e1de59ad61a4468474314841a905b6e3436dc1b4d4b0"
+        }
+      ],
+      "actual_updates": null,
+      "actual_exports": null,
+      "verdict": "terminal_unqualified_quality_reviewed",
+      "qualification": false,
+      "publication_commit": "36af861041bbb5728d82192385311e6af6e5c12c"
+    }
+  ],
+  "appendices": [
+    {
+      "report_path": "mechanical-and-unexecuted.md",
+      "source_artifacts": [
+        {
+          "path": "runtime/kev-cpu-typed-probe-01/root-verdict.json",
+          "sha256": "f35cfe36a5030f61a1c48f4f24c9dcba9affe9fb006480998ca213ac27a09ce0"
+        },
+        {
+          "path": "runtime/kev-gpu-probe-01/root-verdict.json",
+          "sha256": "92d6c2264e387234813168982c8ab65022368db65acfe4b8dfa32c6674e23a03"
+        },
+        {
+          "path": "runtime/kev-ci-rule-robustness-sft-01/root-verdict.json",
+          "sha256": "fddee4a147e22c728e3a0541e5c77da6f432b5116c1bde7a74fd050d5ed05ddd"
+        },
+        {
+          "path": "runtime/kev-question-diversity-sft-01/root-verdict.json",
+          "sha256": "81d6f6fa6a0d82d0f04c7603d585e9557213604d2fe5aff22b6c460b12711c34"
+        },
+        {
+          "path": "runtime/kev-oracle-context-sft-01/root-verdict.json",
+          "sha256": "f2b6008744d55a5fb51c54733bc52452e09f43ce772e81ec73a690bba573c229"
+        },
+        {
+          "path": "runtime/kev-coverage-retention-sft-01/root-verdict.json",
+          "sha256": "ac8283bdf2f495922e1f7b11ed18ac4ef18c93b6f33333fa01112dd47c10e643"
+        },
+        {
+          "path": "runtime/kev-frozen-head-sft-01/root-verdict.json",
+          "sha256": "00fbacb0a12d85d21c0e4e59735ee1af7cdf6341dcb0d63fb1646487b905f7fa"
+        },
+        {
+          "path": "runtime/laya-f08-task-sft-01/root-state.json",
+          "sha256": "acfb83cfb7c9d0f286a179a24104844cc2afa305018a950f3c3c0d1900d4942b"
+        },
+        {
+          "path": "runtime/kev-bound-wording-durable-sft-01/root-integration-verdict.json",
+          "sha256": "a232351e200c44f552e947303c6f1c468a260e239cd98bc96e35a168fbe486cf"
+        },
+        {
+          "path": "runtime/full-model-gradient-repeat-02/result.json",
+          "sha256": "ee243b89241bb4495bc9dcafa14bb20f0e5137cb832c69ec2de28d8ad38445b2"
+        }
+      ]
+    }
+  ]
+}
